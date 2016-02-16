@@ -10,11 +10,11 @@
 </head>
 <body>
 
-<header>
-  <h1>Store Front</h1>
-</header>
+<h1>Store Front</h1>
 
 <hr>
+
+<h2>Catalog</h2>
 
 <div id="product-grid" class="product-grid">
 </div>
@@ -29,6 +29,8 @@
 
 <hr>
 
+<h2>Cart</h2>
+
 <table id="cart">
 </table>
 <template id="template-cart-item">
@@ -41,13 +43,98 @@
 
 <hr>
 
-<button type="button" class="js-product__btn-place-order">Place Order</button>
+<h2>Shipping Address</h2>
+
+<form>
+  <div>
+    <label for="shipping-address__email">Email</label>
+    <input type="text" id="shipping-address__email" value="rocinwinter@gmail.com">
+  </div>
+
+  <div>
+    <label for="shipping-address__first-name">First Name</label>
+    <input type="text" id="shipping-address__first-name" value="Roc">
+  </div>
+
+  <div>
+    <label for="shipping-address__last-name">Last Name</label>
+    <input type="text" id="shipping-address__last-name" value="Wang">
+  </div>
+
+  <div>
+    <label for="shipping-address__street-1">Street Address 1</label>
+    <input type="text" id="shipping-address__street-1" value="15 Carrowmore">
+  </div>
+
+  <div>
+    <label for="shipping-address__street-2">Street Address 2</label>
+    <input type="text" id="shipping-address__street-2" value="Pinehill">
+  </div>
+
+  <div>
+    <label for="shipping-address__city">City</label>
+    <input type="text" id="shipping-address__city" value="North Shore">
+  </div>
+
+  <div>
+    <label for="shipping-address__region">State</label>
+    <input type="text" id="shipping-address__region" value="Auckland">
+  </div>
+
+  <div>
+    <label for="shipping-address__post-code">Zip/Post Code</label>
+    <input type="text" id="shipping-address__post-code" value="0632">
+  </div>
+
+  <div>
+    <label for="shipping-address__country">Country ID</label>
+    <input type="text" id="shipping-address__country" value="nz">
+  </div>
+
+  <div>
+    <label for="shipping-address__phone">Phone Number</label>
+    <input type="text" id="shipping-address__phone" value="027 949 1310">
+  </div>
+
+  <button type="button" class="js-shipping-address__btn-save">Save Shipping Address</button>
+</form>
 
 <hr>
 
-<footer>
-  Footer
-</footer>
+<h2>Shipping Methods</h2>
+
+<form>
+  <div id="shipping-methods"></div>
+  <button type="button" class="js-shipping-methods__btn-save">Save Shipping Address & Method</button>
+</form>
+<template id="template-shipping-methods">
+  <div>
+    <label>
+      <input type="radio" class="js-shipping-methods__input" name="shipping">
+
+      <span class="js-shipping-methods__price-incl-tax"></span>
+      <span class="js-shipping-methods__method-title"></span>
+      <span class="js-shipping-methods__carrier-title"></span>
+    </label>
+  </div>
+</template>
+
+<hr>
+
+<h2>Payment Method</h2>
+
+<form>
+  <div id="payment"></div>
+  <button type="button" class="js-payment__btn-place-order">Place Order</button>
+</form>
+<template id="template-payment">
+  <div>
+    <label>
+      <input type="radio" class="js-payment__input" name="payment">
+      <span class="js-payment__title"></span>
+    </label>
+  </div>
+</template>
 
 <script src="js/vendor.js"></script>
 <script src="js/app.js"></script>
