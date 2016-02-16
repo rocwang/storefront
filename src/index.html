@@ -1,0 +1,56 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Store Front</title>
+  <meta name="description" content="Store Front">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <h1>Store Front</h1>
+</header>
+
+<hr>
+
+<div id="product-grid" class="product-grid">
+</div>
+<template id="template-product">
+  <div class="product js-product">
+    <img src="" alt="Product Image" class="js-product__image product__image">
+    <div class="js-product__name product__name"></div>
+    <div class="js-product__price product__price"></div>
+    <button type="button" class="js-product__btn-add-to-cart">Add to Cart</button>
+  </div>
+</template>
+
+<hr>
+
+<table id="cart">
+</table>
+<template id="template-cart-item">
+  <tr class="js-cart-item cart-item">
+    <td class="js-cart-item__name cart-item__name"></td>
+    <td class="js-cart-item__qty cart-item__qty"></td>
+    <td class="js-cart-item__price cart-item__price"></td>
+  </tr>
+</template>
+
+<hr>
+
+<button type="button" class="js-product__btn-place-order">Place Order</button>
+
+<hr>
+
+<footer>
+  Footer
+</footer>
+
+<script src="js/vendor.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
