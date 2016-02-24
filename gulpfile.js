@@ -32,7 +32,8 @@ var gulp         = require('gulp'),
     concat       = require('gulp-concat'),
     modernizr    = require('modernizr'),
     eslint       = require('gulp-eslint'),
-
+    tslint       = require("gulp-tslint"),
+    ts           = require("gulp-typescript"),
 
     // Image plugins
     imagemin     = require('gulp-imagemin'),
@@ -53,24 +54,26 @@ var basePaths = {
 
 // paths definitions
 var srcFiles = {
-  scss  : [
+  scss     : [
     'scss/style.scss',
   ],
-  js    : [
-    'js/app.js',
-    'js/vendor.js',
+//  js       : [
+//    'js/app.js',
+//    'js/vendor.js',
+//  ],
+  ts       : [
+    'ts/**.ts',
   ],
-  img   : [
+  img      : [
     'img/**',
   ],
-  sprite: [
+  sprite   : [
     'sprite/*.svg',
   ],
-  html  : [
+  html     : [
     'index.html',
   ],
-  misc  : [
-  ],
+  misc     : [],
   modernizr: 'js/app/modernizr.js',
 };
 
@@ -121,6 +124,20 @@ gulp.task('js', ['modernizr', 'eslint'], function () {
   });
 
   return mergedStream;
+});
+
+gulp.task('ts', ['tslint'], function () {
+  var tsProject = ts.createProject('./tsconfig.json');
+  var tsResult = tsProject.src() // instead of gulp.src(...)
+    .pipe(ts(tsProject));
+
+  return tsResult.js.pipe(gulp.dest(basePaths.test + 'js'));
+});
+
+gulp.task("tslint", function () {
+  return gulp.src(basePaths.src + '**.ts')
+    .pipe(tslint())
+    .pipe(tslint.report("verbose"));
 });
 
 gulp.task('img', function () {

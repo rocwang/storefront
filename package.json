@@ -1,48 +1,64 @@
 {
-  "name": "storefront",
-  "version": "1.0.0",
-  "description": "One page storefront for Magento2",
-  "main": "index.html",
-  "scripts": {
-    "test": "gulp test"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@bitbucket.org/rocwang/storefront.git"
-  },
-  "keywords": [
-    "storefront",
-    "magento2"
-  ],
-  "author": "Roc Wang",
-  "license": "UNLICENSED",
-  "homepage": "https://bitbucket.org/rocwang/storefront#readme",
-  "devDependencies": {
-    "breakpoint-sass": "2.x",
-    "browser-sync": "latest",
-    "del": "latest",
-    "gulp": "latest",
-    "gulp-autoprefixer": "latest",
-    "gulp-concat": "latest",
-    "gulp-cssnano": "latest",
-    "gulp-eslint": "latest",
-    "gulp-html5-lint": "latest",
-    "gulp-htmlmin": "latest",
-    "gulp-imagemin": "latest",
-    "gulp-inline-source": "latest",
-    "gulp-notify": "latest",
-    "gulp-plumber": "latest",
-    "gulp-rev-all": "latest",
-    "gulp-sass": "latest",
-    "gulp-scss-lint": "latest",
-    "gulp-sourcemaps": "latest",
-    "gulp-svg-sprite": "latest",
-    "gulp-uglify": "latest",
-    "gulp-util": "latest",
-    "jquery": "latest",
-    "merge-stream": "latest",
-    "modernizr": "3.x",
-    "svg4everybody": "2.x",
-    "swagger-client": "^2.1.11"
-  }
+    "name"           : "storefront",
+    "version"        : "1.0.0",
+    "description"    : "One page storefront for Magento2",
+    "main"           : "index.html",
+    "repository"     : {
+        "type": "git",
+        "url" : "git+ssh://git@bitbucket.org/rocwang/storefront.git"
+    },
+    "keywords"       : [
+        "storefront",
+        "magento2"
+    ],
+    "author"         : "Roc Wang",
+    "license"        : "UNLICENSED",
+    "homepage"       : "https://bitbucket.org/rocwang/storefront",
+    "scripts"        : {
+        "postinstall": "npm run typings install",
+        "typings"    : "typings"
+    },
+    "devDependencies": {
+        "breakpoint-sass"   : "2.x",
+        "browser-sync"      : "latest",
+        "del"               : "latest",
+        "gulp"              : "latest",
+        "gulp-autoprefixer" : "latest",
+        "gulp-concat"       : "latest",
+        "gulp-cssnano"      : "latest",
+        "gulp-eslint"       : "latest",
+        "gulp-html5-lint"   : "latest",
+        "gulp-htmlmin"      : "latest",
+        "gulp-imagemin"     : "latest",
+        "gulp-inline-source": "latest",
+        "gulp-notify"       : "latest",
+        "gulp-plumber"      : "latest",
+        "gulp-rev-all"      : "latest",
+        "gulp-sass"         : "latest",
+        "gulp-scss-lint"    : "latest",
+        "gulp-sourcemaps"   : "latest",
+        "gulp-svg-sprite"   : "latest",
+        "gulp-tslint"       : "latest",
+        "gulp-typescript"   : "latest",
+        "gulp-uglify"       : "latest",
+        "gulp-util"         : "latest",
+        "jquery"            : "latest",
+        "merge-stream"      : "latest",
+        "modernizr"         : "3.x",
+        "svg4everybody"     : "2.x",
+        "swagger-client"    : "latest",
+        "typescript"        : "latest",
+        "typings"           : "latest",
+        "tslint"            : "latest"
+    },
+    "dependencies"   : {
+        "angular2"        : "latest",
+        "systemjs"        : "latest",
+        "es6-promise"     : "^3.0.2",
+        "es6-shim"        : "^0.33.3",
+        "reflect-metadata": "0.1.2",
+        "rxjs"            : "5.0.0-beta.2",
+        "zone.js"         : "0.5.15"
+    }
 }
+

@@ -3,141 +3,39 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <base href="/">
   <title>Store Front</title>
   <meta name="description" content="Store Front">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <link rel="stylesheet" href="css/style.css">
+
+  <!-- 1. Load libraries -->
+  <!-- IE required polyfills, in this exact order -->
+  <script src="node_modules/es6-shim/es6-shim.min.js"></script>
+  <script src="node_modules/systemjs/dist/system-polyfills.js"></script>
+
+  <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
+  <script src="node_modules/systemjs/dist/system.src.js"></script>
+  <script src="node_modules/rxjs/bundles/Rx.js"></script>
+  <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
+  <script src="node_modules/angular2/bundles/router.dev.js"></script>
+
+  <!-- 2. Configure SystemJS -->
+  <script>
+    System.config({
+      packages: {
+        app: {
+          format          : 'register',
+          defaultExtension: 'js'
+        }
+      }
+    });
+    System.import('app/main').then(null, console.error.bind(console));
+  </script>
 </head>
 <body>
-
-<h1>Store Front</h1>
-
-<hr>
-
-<h2>Catalog</h2>
-
-<div id="product-grid" class="product-grid">
-</div>
-<template id="template-product">
-  <div class="product js-product">
-    <img src="" alt="Product Image" class="js-product__image product__image">
-    <div class="js-product__name product__name"></div>
-    <div class="js-product__price product__price"></div>
-    <button type="button" class="js-product__btn-add-to-cart">Add to Cart</button>
-  </div>
-</template>
-
-<hr>
-
-<h2>Cart</h2>
-
-<table id="cart">
-</table>
-<template id="template-cart-item">
-  <tr class="js-cart-item cart-item">
-    <td class="js-cart-item__name cart-item__name"></td>
-    <td class="js-cart-item__qty cart-item__qty"></td>
-    <td class="js-cart-item__price cart-item__price"></td>
-  </tr>
-</template>
-
-<hr>
-
-<h2>Shipping Address</h2>
-
-<form>
-  <div>
-    <label for="shipping-address__email">Email</label>
-    <input type="text" id="shipping-address__email" value="rocinwinter@gmail.com">
-  </div>
-
-  <div>
-    <label for="shipping-address__first-name">First Name</label>
-    <input type="text" id="shipping-address__first-name" value="Roc">
-  </div>
-
-  <div>
-    <label for="shipping-address__last-name">Last Name</label>
-    <input type="text" id="shipping-address__last-name" value="Wang">
-  </div>
-
-  <div>
-    <label for="shipping-address__street-1">Street Address 1</label>
-    <input type="text" id="shipping-address__street-1" value="15 Carrowmore">
-  </div>
-
-  <div>
-    <label for="shipping-address__street-2">Street Address 2</label>
-    <input type="text" id="shipping-address__street-2" value="Pinehill">
-  </div>
-
-  <div>
-    <label for="shipping-address__city">City</label>
-    <input type="text" id="shipping-address__city" value="North Shore">
-  </div>
-
-  <div>
-    <label for="shipping-address__region">State</label>
-    <input type="text" id="shipping-address__region" value="Auckland">
-  </div>
-
-  <div>
-    <label for="shipping-address__post-code">Zip/Post Code</label>
-    <input type="text" id="shipping-address__post-code" value="0632">
-  </div>
-
-  <div>
-    <label for="shipping-address__country">Country ID</label>
-    <input type="text" id="shipping-address__country" value="nz">
-  </div>
-
-  <div>
-    <label for="shipping-address__phone">Phone Number</label>
-    <input type="text" id="shipping-address__phone" value="027 949 1310">
-  </div>
-
-  <button type="button" class="js-shipping-address__btn-save">Save Shipping Address</button>
-</form>
-
-<hr>
-
-<h2>Shipping Methods</h2>
-
-<form>
-  <div id="shipping-methods"></div>
-  <button type="button" class="js-shipping-methods__btn-save">Save Shipping Address & Method</button>
-</form>
-<template id="template-shipping-methods">
-  <div>
-    <label>
-      <input type="radio" class="js-shipping-methods__input" name="shipping">
-
-      <span class="js-shipping-methods__price-incl-tax"></span>
-      <span class="js-shipping-methods__method-title"></span>
-      <span class="js-shipping-methods__carrier-title"></span>
-    </label>
-  </div>
-</template>
-
-<hr>
-
-<h2>Payment Method</h2>
-
-<form>
-  <div id="payment"></div>
-  <button type="button" class="js-payment__btn-place-order">Place Order</button>
-</form>
-<template id="template-payment">
-  <div>
-    <label>
-      <input type="radio" class="js-payment__input" name="payment">
-      <span class="js-payment__title"></span>
-    </label>
-  </div>
-</template>
-
-<script src="js/vendor.js"></script>
-<script src="js/app.js"></script>
-
+<!-- 3. Display the application -->
+<my-app>Loading...</my-app>
 </body>
 </html>
