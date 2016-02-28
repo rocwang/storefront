@@ -1,0 +1,24 @@
+<div class="ui top fixed small menu">
+  <div class="header item">{{title}}</div>
+</div>
+
+<router-outlet></router-outlet>
+
+<div class="ui bottom fixed labeled icon fluid four item menu">
+  <a class="item" [routerLink]="['Catalog']">
+    <i class="grid layout icon"></i>
+    Catalog
+  </a>
+  <a class="item">
+    <i class="shop icon"></i>
+    Cart
+  </a>
+  <a class="item">
+    <i class="payment icon"></i>
+    Checkout
+  </a>
+  <a class="item">
+    <i class="user icon"></i>
+    Me
+  </a>
+</div>

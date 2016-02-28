@@ -1,6 +1,6 @@
+.DS_Store
 /.idea/
 /node_modules/
 /test/
-.DS_Store
-/src/js/app/modernizr.js
 /typings/
+/semantic/

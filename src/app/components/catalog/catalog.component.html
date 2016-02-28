@@ -1,0 +1,36 @@
+<div class="ui grid">
+  <div class="twelve wide column">
+
+    <div class="ui link cards">
+      <div class="card" *ngFor="#product of products">
+
+        <div class="image">
+          <img src="{{product.imgSrc}}">
+        </div>
+
+        <div class="content">
+          <div class="header">{{product.name}}</div>
+        </div>
+
+        <div class="extra content">
+          <span>{{product.price | currency:'NZD':true}}</span>
+          <button class="ui primary mini button right floated"
+                  (click)="addToCart(product)"
+                  [class.loading]="product.isAdding"
+                  [class.disabled]="product.isAdding"
+          >
+            Add to Cart
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+  <div class="four wide column">
+
+    <cart></cart>
+
+  </div>
+
+</div>
