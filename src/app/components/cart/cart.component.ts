@@ -17,6 +17,7 @@ export class CartComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.refresh();
   }
 
   getCardId(): Promise<string> {

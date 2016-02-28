@@ -1,27 +1,22 @@
-<div class="ui divided items">
-
-  <div class="item" *ngFor="#item of items">
-    <div class="ui tiny image">
-      <img src="/images/wireframe/image.png">
-    </div>
-    <div class="content">
-      <a class="header">{{item.name}}</a>
-      <div class="meta">
-        <span>{{item.qty}}</span>
-        &times;
-        <span>{{item.price | currency:'NZD':true}}</span>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-total.total_segments.forEach(function (element) {
-var template = document.importNode(document.querySelector('#template-cart-item').content, true);
-
-template.querySelector('.js-cart-item__name').textContent = element.title;
-template.querySelector('.js-cart-item__qty').textContent = '';
-template.querySelector('.js-cart-item__price').textContent = element.value;
-
-container.appendChild(template);
-});
+<table class="ui very compact striped table">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Quantiy</th>
+    <th>Price</th>
+  </tr>
+  </thead>
+  <tfoot>
+  <tr *ngFor="#total of totals">
+    <td colspan="2"><strong>{{total.title}}</strong></td>
+    <td><strong>{{total.value | currency:'NZD':true}}</strong></td>
+  </tr>
+  </tfoot>
+  <tbody>
+  <tr *ngFor="#item of items">
+    <td>{{item.name}}</td>
+    <td>{{item.qty}}</td>
+    <td>{{item.price | currency:'NZD':true}}</td>
+  </tr>
+  </tbody>
+</table>
