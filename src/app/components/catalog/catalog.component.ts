@@ -26,10 +26,12 @@ export class CatalogComponent implements OnInit {
   }
 
   addToCart(product: Product) {
-    product.isAdding = true;
-    this._cart.add(product).then(() => {
-      product.isAdding = false;
-    });
+    if (!product.isAdding) {
+      product.isAdding = true;
+      this._cart.add(product).then(() => {
+        product.isAdding = false;
+      });
+    }
   }
 
   getProducts() {
