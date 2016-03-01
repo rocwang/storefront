@@ -4,13 +4,14 @@ declare var SwaggerClient: any;
 
 @Injectable()
 export class MagentoService {
+  baseUrl = 'http://m2.rocwang.me/';
   swagger;
   api;
 
   getSwaggerClient(): Promise<any> {
     if (!this.swagger) {
-      this.swagger =  new SwaggerClient({
-        url: 'http://m2.rocwang.me/rest/default/schema',
+      this.swagger = new SwaggerClient({
+        url       : this.baseUrl + 'rest/default/schema',
         usePromise: true,
       });
 

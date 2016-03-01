@@ -100,7 +100,7 @@ gulp.task('scsslint', function () {
 });
 
 gulp.task('scss', ['scsslint'], function () {
-  return gulp.src(srcFiles.scss, {cwd: basePaths.src})
+  return gulp.src(srcFiles.scss, {cwd: basePaths.src + 'scss'})
     .pipe(plumber({errorHandler: onError}))
     .pipe(isProduction ? util.noop() : sourcemaps.init())
     .pipe(sass({
