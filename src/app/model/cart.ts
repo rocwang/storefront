@@ -1,11 +1,12 @@
-import {Injectable} from 'angular2/core';
+import {Injectable, EventEmitter} from 'angular2/core';
 import {MagentoService} from '../services/magento.service';
 import {Product} from '../product';
 
 @Injectable()
 export class Cart {
-  items;
-  totals;
+  items: Array<any> = [];
+  totals: Array<any> = [];
+  refreshEvent: EventEmitter<any> = new EventEmitter();
 
   constructor(private _magento: MagentoService) {
   }
@@ -50,7 +51,7 @@ export class Cart {
             console.log('Add to cart: ', data.obj);
             resolve();
 
-            this.refresh();
+            this.refresh(true);
           });
         });
       });
@@ -59,7 +60,7 @@ export class Cart {
   }
 
   // Refresh cart
-  refresh() {
+  refresh(triggerEvent) {
     return this.getCardId().then(cartId => {
       this._magento.getSwaggerClient().then(api => {
 
@@ -70,6 +71,10 @@ export class Cart {
 
           this.items = data.obj.items;
           this.totals = data.obj.total_segments;
+
+          if (triggerEvent) {
+            this.refreshEvent.emit(null);
+          }
 
         });
 

@@ -1,4 +1,4 @@
-import {Component, ViewChild} from 'angular2/core';
+import {Component, ViewChild, ChangeDetectorRef} from 'angular2/core';
 import {Router, RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
 import {CatalogComponent} from '../catalog/catalog.component';
 import {MagentoService} from '../../services/magento.service';
@@ -15,6 +15,7 @@ import {MeComponent} from '../me/me.component';
     ROUTER_PROVIDERS,
     MagentoService,
     Cart,
+    ChangeDetectorRef,
   ]
 })
 @RouteConfig([
