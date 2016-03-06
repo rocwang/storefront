@@ -30,7 +30,6 @@ var gulp               = require('gulp'),
     // JS plugins
     //    uglify       = require('gulp-uglify'),
     //    concat       = require('gulp-concat'),
-    modernizr          = require('modernizr'),
     eslint             = require('gulp-eslint'),
     tslint             = require("gulp-tslint"),
     ts                 = require("gulp-typescript"),
@@ -83,7 +82,6 @@ var srcFiles = {
   semantic : [
     "semantic/dist/**",
   ],
-  modernizr: 'modernizr.js',
 };
 
 gulp.task('clean', function (cb) {
@@ -124,7 +122,6 @@ gulp.task('eslint', function () {
   return gulp.src([
       'gulpfile.js',
       basePaths.src + '**.js',
-      '!' + basePaths.src + srcFiles.modernizr,
     ])
     .pipe(eslint())
     .pipe(eslint.format())
@@ -210,28 +207,6 @@ gulp.task('semantic', function () {
   return gulp.src(srcFiles.semantic)
     .pipe(plumber({errorHandler: onError}))
     .pipe(gulp.dest(basePaths.test + 'semantic'));
-});
-
-gulp.task('modernizr', function (cb) {
-  modernizr.build({
-    'classPrefix'    : '',
-    'options'        : [
-      'setClasses',
-    ],
-    'feature-detects': [
-      'css/flexbox',
-    ],
-  }, function (result) {
-    fs.writeFile(basePaths.test + 'js/modernizr.js', result, function (err) {
-      if (err) {
-        return cb(err);
-      }
-
-      /*eslint no-console: 0*/
-      console.log('modernizr.js is generated');
-      cb();
-    });
-  });
 });
 
 // Default task
