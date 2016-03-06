@@ -22,7 +22,7 @@ export class Cart {
 
       return new Promise<string>(resolve => {
         this._magento.getSwaggerClient().then(api => {
-          api.quoteGuestCartManagementV1.quoteGuestCartManagementV1CreateEmptyCartPost().then(data => {
+          api.quoteGuestCartManagementV1.quoteGuestCartManagementV1CreateEmptyCartPost().then((data: any) => {
             console.log('Cart Id:', data);
             var cartId = data.data.replace(/"/g, '');
             localStorage.setItem('cartId', cartId);
@@ -47,7 +47,7 @@ export class Cart {
                 'qty'     : 1,
               }
             }
-          }).then(data => {
+          }).then((data: any) => {
             console.log('Add to cart: ', data.obj);
             resolve();
 
@@ -60,13 +60,13 @@ export class Cart {
   }
 
   // Refresh cart
-  refresh(triggerEvent) {
+  refresh(triggerEvent: boolean) {
     return this.getCardId().then(cartId => {
       this._magento.getSwaggerClient().then(api => {
 
         api.quoteGuestCartTotalRepositoryV1.quoteGuestCartTotalRepositoryV1GetGet({
           cartId: cartId,
-        }).then(data => {
+        }).then((data: any) => {
           console.log('Cart:', data.obj);
 
           this.items = data.obj.items;

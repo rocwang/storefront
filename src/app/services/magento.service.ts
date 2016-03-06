@@ -5,8 +5,8 @@ declare var SwaggerClient: any;
 @Injectable()
 export class MagentoService {
   baseUrl = 'http://m2.rocwang.me/';
-  swagger;
-  api;
+  swagger: any;
+  api: any;
 
   getSwaggerClient(): Promise<any> {
     if (!this.swagger) {
@@ -15,7 +15,7 @@ export class MagentoService {
         usePromise: true,
       });
 
-      this.swagger.then(api => {
+      this.swagger.then((api: any) => {
         console.log('API loaded');
         this.api = api;
       });

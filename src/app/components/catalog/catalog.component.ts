@@ -40,12 +40,12 @@ export class CatalogComponent implements OnInit {
         'searchCriteria[filter_groups][0][filters][0][condition_type]': 'equal',
         'searchCriteria[pageSize]'                                    : 24,
         'searchCriteria[currentPage]'                                 : 1,
-      }).then(data => {
+      }).then((data: any) => {
         console.log('Products:', data.obj);
 
         // Find the product image
-        data.obj.items.forEach(product => {
-          product.custom_attributes.forEach(attr => {
+        data.obj.items.forEach((product: any) => {
+          product.custom_attributes.forEach((attr: any) => {
             if (attr.attribute_code === 'small_image') {
               product.imgSrc = this._magento.baseUrl + 'media/catalog/product' + attr.value;
             }
