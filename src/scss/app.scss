@@ -19,6 +19,9 @@ $sidebar-bg : #fff;
   left     : 0;
   right    : 0;
   height   : calc(100vh - 38.125px - 72px);
-  overflow: auto;
+  overflow : auto;
 }
 
+.ui.cards > .card {
+  flex : 1 1 auto;
+}
