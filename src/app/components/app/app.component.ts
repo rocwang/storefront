@@ -6,6 +6,7 @@ import {CartComponent} from '../cart/cart.component';
 import {Cart} from '../../model/cart';
 import {CheckoutComponent} from '../checkout/checkout.component';
 import {MeComponent} from '../me/me.component';
+import {Catalog} from '../../model/catalog';
 
 @Component({
   selector   : 'body',
@@ -16,25 +17,13 @@ import {MeComponent} from '../me/me.component';
     MagentoService,
     Cart,
     ChangeDetectorRef,
+    Catalog,
   ]
 })
 @RouteConfig([
-  {
-    path        : '/catalog',
-    name        : 'Catalog',
-    component   : CatalogComponent,
-    useAsDefault: true,
-  },
-  {
-    path     : '/checkout',
-    name     : 'Checkout',
-    component: CheckoutComponent,
-  },
-  {
-    path     : '/me',
-    name     : 'Me',
-    component: MeComponent,
-  },
+  {path: '/catalog', name: 'Catalog', component: CatalogComponent, useAsDefault: true},
+  {path: '/checkout', name: 'Checkout', component: CheckoutComponent},
+  {path: '/me', name: 'Me', component: MeComponent},
 ])
 export class AppComponent {
   title = 'Storefront';

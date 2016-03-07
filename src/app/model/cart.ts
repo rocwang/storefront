@@ -1,6 +1,6 @@
 import {Injectable, EventEmitter} from 'angular2/core';
 import {MagentoService} from '../services/magento.service';
-import {Product} from '../product';
+import {Product} from './product';
 
 @Injectable()
 export class Cart {
