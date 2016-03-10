@@ -7,21 +7,26 @@ import {Cart} from '../../model/cart';
 import {CheckoutComponent} from '../checkout/checkout.component';
 import {MeComponent} from '../me/me.component';
 import {Catalog} from '../../model/catalog';
+import {FeaturedComponent} from '../featured/featured.component';
+import {Featured} from '../../model/featured';
+import {NavComponent} from '../nav/navigation.component';
 
 @Component({
-  selector   : 'body',
+  selector   : 'app',
   templateUrl: 'app/components/app/app.component.html',
-  directives : [ROUTER_DIRECTIVES, CartComponent],
+  directives : [ROUTER_DIRECTIVES, CartComponent, NavComponent],
   providers  : [
     ROUTER_PROVIDERS,
     MagentoService,
     Cart,
     ChangeDetectorRef,
     Catalog,
+    Featured,
   ]
 })
 @RouteConfig([
-  {path: '/catalog', name: 'Catalog', component: CatalogComponent, useAsDefault: true},
+  {path: '/featured', name: 'Featured', component: FeaturedComponent, useAsDefault: true},
+  {path: '/catalog', name: 'Catalog', component: CatalogComponent},
   {path: '/checkout', name: 'Checkout', component: CheckoutComponent},
   {path: '/me', name: 'Me', component: MeComponent},
 ])

@@ -15,8 +15,8 @@ export class CartComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.cart.refresh(false);
-    this.cart.refreshEvent.subscribe(() => this.show());
+    // this.cart.refresh(false);
+    // this.cart.refreshEvent.subscribe(() => this.show());
   }
 
   show() {

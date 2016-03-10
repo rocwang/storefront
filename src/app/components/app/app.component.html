@@ -1,35 +1,22 @@
-<div class="ui right very wide sidebar">
-  <cart></cart>
-</div>
+<!--<div class="ui right very wide sidebar">-->
+  <!--<cart></cart>-->
+<!--</div>-->
 
-<div class="pusher">
+<!--<div class="pusher">-->
   <header class="ui small top fixed menu">
     <div class="header item">{{title}}</div>
 
-    <div class="right menu">
-      <a class="ui item" (click)="toggleCart()">
-        <i class="shop icon"></i>
-        Cart
-      </a>
-    </div>
+    <!--<div class="right menu">-->
+      <!--<a class="ui item" (click)="toggleCart()">-->
+        <!--<i class="shop icon"></i>-->
+        <!--Cart-->
+      <!--</a>-->
+    <!--</div>-->
   </header>
 
   <div class="app-body">
     <router-outlet></router-outlet>
   </div>
 
-  <footer class="ui bottom fixed labeled icon fluid three item menu">
-    <a class="item" [routerLink]="['Catalog']">
-      <i class="grid layout icon"></i>
-      Catalog
-    </a>
-    <a class="item" [routerLink]="['Checkout']">
-      <i class="payment icon"></i>
-      Checkout
-    </a>
-    <a class="item" [routerLink]="['Me']">
-      <i class="user icon"></i>
-      Me
-    </a>
-  </footer>
-</div>
+  <nav class="ui bottom fixed labeled icon fluid four item menu"></nav>
+<!--</div>-->

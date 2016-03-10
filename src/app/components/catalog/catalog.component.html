@@ -13,8 +13,7 @@
       <span>{{product.price | currency:'NZD':true}}</span>
       <button class="ui primary mini button right floated"
               (click)="add(product)"
-              [class.loading]="product.isAdding"
-              [class.disabled]="product.isAdding"
+              [ngClass]="{loading: product.isAdding, disabled: product.isAdding}"
       >
         Add to Cart
       </button>

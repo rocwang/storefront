@@ -1,0 +1,23 @@
+<a class="item" [routerLink]="['Featured']">
+  <i class="star icon"></i>
+  Featured
+</a>
+<a class="item" [routerLink]="['Catalog']">
+  <i class="grid layout icon"></i>
+  Catalog
+</a>
+<a id="nav-checkout"
+   class="item"
+   [routerLink]="['Checkout']"
+   (mouseenter)="showSummary()"
+   (mouseleav)="hideSummary()"
+   [attr.data-title]="'Grand Total: ' + (cart.grand_total | currency:'NZD':true)"
+>
+  <i class="payment icon"></i>
+  <a class="ui red floating circular label" *ngIf="cart.items_qty > 0">{{cart.items_qty}}</a>
+  Cart / Checkout
+</a>
+<a class="item" [routerLink]="['Me']">
+  <i class="user icon"></i>
+  Me
+</a>

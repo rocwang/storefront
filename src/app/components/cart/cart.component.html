@@ -16,9 +16,9 @@
 
 </div>
 
-<table class="ui very compact striped table" *ngIf="cart.totals.length">
+<table class="ui very compact striped table" *ngIf="cart.total_segments.length">
   <tbody>
-    <tr *ngFor="#total of cart.totals">
+    <tr *ngFor="#total of cart.total_segments">
       <td class="eight wide">{{total.title}}</td>
       <td class="eight wide">{{total.value | currency:'NZD':true}}</td>
     </tr>
