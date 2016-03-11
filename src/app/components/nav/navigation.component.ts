@@ -10,32 +10,37 @@ import {Catalog} from '../../model/catalog';
 import {FeaturedComponent} from '../featured/featured.component';
 import {Featured} from '../../model/featured';
 
-declare var $: any;
-
 @Component({
   selector   : 'nav',
   templateUrl: 'app/components/nav/nav.component.html',
-  directives : [ROUTER_DIRECTIVES, CartComponent],
+  directives : [ROUTER_DIRECTIVES],
 })
 export class NavComponent implements OnInit {
+  private _timeoutHandle: number;
+
   constructor(public cart: Cart, private _changeDetectorRef: ChangeDetectorRef) {
   }
 
   ngOnInit() {
     this.cart.refreshEvent.subscribe(() => this.showSummary());
+
+    $('#nav-checkout').popup({
+      position  : 'top center',
+      transition: 'fade up',
+    }).popup('show');
   }
 
   showSummary() {
     this._changeDetectorRef.detectChanges();
 
-    $('#nav-checkout') .popup({
-      closable  : true,
-      position  : 'top center',
-      transition: 'fade up'
-    }).popup('show');
-  }
+    if (this._timeoutHandle) {
+      clearTimeout(this._timeoutHandle);
+    }
 
-  hideSummary() {
-    $('#nav-checkout').popup('hide');
+    $('#nav-checkout').popup('show');
+
+    this._timeoutHandle = setTimeout(function() {
+      $('#nav-checkout').popup('hide');
+    }, 3000);
   }
 }

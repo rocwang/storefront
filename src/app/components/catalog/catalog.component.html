@@ -2,7 +2,7 @@
   <div class="card" *ngFor="#product of products">
 
     <div class="image">
-      <img src="{{product.imgSrc}}">
+      <img src="{{product.imgSrc}}" #productImg>
     </div>
 
     <div class="content">
@@ -12,7 +12,8 @@
     <div class="extra content">
       <span>{{product.price | currency:'NZD':true}}</span>
       <button class="ui primary mini button right floated"
-              (click)="add(product)"
+              type="button"
+              (click)="add(product, productImg)"
               [ngClass]="{loading: product.isAdding, disabled: product.isAdding}"
       >
         Add to Cart

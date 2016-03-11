@@ -1,9 +1,6 @@
 import {Component, OnInit, Input, ChangeDetectorRef} from 'angular2/core';
 import {Cart} from '../../model/cart';
 
-declare var $: any;
-
-
 @Component({
   selector   : 'cart',
   templateUrl: 'app/components/cart/cart.component.html',

@@ -5,6 +5,7 @@ import {Product} from './product';
 @Injectable()
 export class Cart {
   refreshEvent: EventEmitter<any> = new EventEmitter();
+  isRefreshing = false;
 
   base_currency_code: string;
   base_discount_amount: number;
@@ -59,6 +60,8 @@ export class Cart {
   }
 
   add(product: Product) {
+    product.isAdding = true;
+
     return new Promise(resolve => {
 
       this.getCardId().then(cartId => {
@@ -74,9 +77,8 @@ export class Cart {
             }
           }).then((data: any) => {
             console.log('Add to cart: ', data.obj);
+            product.isAdding = false;
             resolve();
-
-            this.refresh(true);
           });
         });
       });
@@ -86,25 +88,33 @@ export class Cart {
 
   // Refresh cart
   refresh(triggerEvent: boolean) {
-    return this.getCardId().then(cartId => {
-      this._magento.getSwaggerClient().then(api => {
+    this.isRefreshing = true;
+    return new Promise(resolve => {
 
-        api.quoteGuestCartTotalRepositoryV1.quoteGuestCartTotalRepositoryV1GetGet({
-          cartId: cartId,
-        }).then((data: any) => {
-          console.log('Cart:', data.obj);
+      this.getCardId().then(cartId => {
+        this._magento.getSwaggerClient().then(api => {
 
-          for (var key in data.obj) {
-            this[key] = data.obj[key];
-          }
+          api.quoteGuestCartTotalRepositoryV1.quoteGuestCartTotalRepositoryV1GetGet({
+            cartId: cartId,
+          }).then((data: any) => {
+            console.log('Cart:', data.obj);
 
-          if (triggerEvent) {
-            this.refreshEvent.emit(null);
-          }
+            for (var key in data.obj) {
+              this[key] = data.obj[key];
+            }
 
+            if (triggerEvent) {
+              this.refreshEvent.emit(null);
+            }
+
+            this.isRefreshing = false;
+
+            resolve();
+
+          });
         });
-
       });
+
     });
   }
 }

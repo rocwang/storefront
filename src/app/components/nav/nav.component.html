@@ -6,14 +6,18 @@
   <i class="grid layout icon"></i>
   Catalog
 </a>
+<!--(mouseenter)="showSummary()"-->
+<!--(mouseleav)="hideSummary()"-->
 <a id="nav-checkout"
    class="item"
    [routerLink]="['Checkout']"
-   (mouseenter)="showSummary()"
-   (mouseleav)="hideSummary()"
    [attr.data-title]="'Grand Total: ' + (cart.grand_total | currency:'NZD':true)"
 >
-  <i class="payment icon"></i>
+  <i id="icon-cart"
+     class="icon"
+     [ngClass]="{payment: !cart.isRefreshing, loading: cart.isRefreshing, spinner: cart.isRefreshing}"
+  ></i>
+
   <a class="ui red floating circular label" *ngIf="cart.items_qty > 0">{{cart.items_qty}}</a>
   Cart / Checkout
 </a>
