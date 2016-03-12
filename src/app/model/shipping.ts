@@ -8,7 +8,20 @@ import {Address} from '../typings/adress';
 @Injectable()
 export class Shipping {
   selectedMethod: ShippingMethod;
-  selectedAddress: Address;
+  selectedAddress: Address = {
+    region    : '',
+    regionId  : 0,
+    countryId : 'nz',
+    postcode  : '',
+    street    : ['', ''],
+    telephone : '',
+    city      : '',
+    firstname : '',
+    lastname  : '',
+    methodCode: '',
+    carrayCode: '',
+    company   : ''
+  };
   availableMethods: Array<ShippingMethod>;
 
   constructor(private _magento: MagentoService, private _cart: Cart, private _payment: Payment) {
