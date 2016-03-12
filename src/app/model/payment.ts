@@ -8,6 +8,7 @@ export class Payment {
   code: string;
   title: string;
   availableMethods: Array<PaymentMethod>;
+  selectedMethod: PaymentMethod;
 
   constructor(private _magento: MagentoService, private _cart: Cart) {
   }
@@ -35,6 +36,26 @@ export class Payment {
             this._cart.reset();
             resolve(data.obj);
             alert('Order placed!');
+
+          });
+        });
+      });
+    });
+
+  }
+
+  getMethods(): Promise<Array<PaymentMethod>> {
+
+    return new Promise(resolve => {
+      this._cart.getCardId().then(cartId => {
+        this._magento.getSwaggerClient().then(api => {
+          api.quoteGuestPaymentMethodManagementV1.quoteGuestPaymentMethodManagementV1GetListGet({
+            cartId: cartId,
+          }).then((data: any) => {
+
+            console.log('Available Payment Methods: ', data.obj);
+            this.availableMethods = data.obj;
+            resolve(this.availableMethods);
 
           });
         });

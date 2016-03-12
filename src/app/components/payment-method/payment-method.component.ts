@@ -11,5 +11,8 @@ export class PaymentMethodComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.payment.getMethods().then(() => {
+      this._changeDetectorRef.detectChanges();
+    });
   }
 }

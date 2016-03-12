@@ -1,14 +1,22 @@
-<h2>Payment Method</h2>
+<form class="ui form">
+  <h2>Payment Methods</h2>
 
-<form>
-  <div id="payment"></div>
-  <button type="button" class="js-payment__btn-place-order">Place Order</button>
-</form>
-<template id="template-payment">
-  <div>
-    <label>
-      <input type="radio" class="js-payment__input" name="payment">
-      <span class="js-payment__title"></span>
-    </label>
+  <div class="grouped fields">
+
+    <div class="field" *ngFor="#method of payment.availableMethods">
+      <div class="ui radio checkbox">
+        <input type="radio"
+               tabindex="0"
+               class="hidden"
+               name="payment_method"
+        >
+        <label>{{method.title}}</label>
+      </div>
+    </div>
+
   </div>
-</template>
+
+  <button class="massive ui button">
+    Place Order
+  </button>
+</form>

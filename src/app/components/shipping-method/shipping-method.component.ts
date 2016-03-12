@@ -11,5 +11,8 @@ export class ShippingMethodComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.shipping.getShippingMethodsByCart().then(() => {
+      this._changeDetectorRef.detectChanges();
+    });
   }
 }

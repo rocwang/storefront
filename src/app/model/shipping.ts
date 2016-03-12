@@ -11,7 +11,7 @@ export class Shipping {
   selectedAddress: Address = {
     region    : '',
     regionId  : 0,
-    countryId : 'nz',
+    countryId : 'us',
     postcode  : '',
     street    : ['', ''],
     telephone : '',
@@ -22,7 +22,7 @@ export class Shipping {
     carrayCode: '',
     company   : ''
   };
-  availableMethods: Array<ShippingMethod>;
+  availableMethods: Array<ShippingMethod> = [];
 
   constructor(private _magento: MagentoService, private _cart: Cart, private _payment: Payment) {
   }
@@ -38,6 +38,7 @@ export class Shipping {
             $body : {
               address: {
                 region   : this.selectedAddress.region,
+                // regionId : 0,
                 countryId: this.selectedAddress.countryId,
                 postcode : this.selectedAddress.postcode,
               }
@@ -55,6 +56,29 @@ export class Shipping {
     });
 
   }
+
+  getShippingMethodsByCart(): Promise<any> {
+
+    return new Promise(resolve => {
+      this._cart.getCardId().then(cartId => {
+        this._magento.getSwaggerClient().then(api => {
+          api.quoteGuestShippingMethodManagementV1.quoteGuestShippingMethodManagementV1GetListGet({
+
+            cartId: cartId,
+
+          }).then((data: any) => {
+
+            console.log('Shipping methods by Cart: ', data.obj);
+            this.availableMethods = data.obj;
+            resolve(this.availableMethods);
+
+          });
+        });
+      });
+    });
+
+  }
+
 
   saveShippingInfoAndGetPaymentMethods(): Promise<any> {
 
