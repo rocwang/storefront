@@ -6,8 +6,6 @@
   <i class="grid layout icon"></i>
   Catalog
 </a>
-<!--(mouseenter)="showSummary()"-->
-<!--(mouseleav)="hideSummary()"-->
 <a id="nav-checkout"
    class="item"
    [routerLink]="['Checkout']"
@@ -15,11 +13,11 @@
 >
   <i id="icon-cart"
      class="icon"
-     [ngClass]="{payment: !cart.isRefreshing, loading: cart.isRefreshing, spinner: cart.isRefreshing}"
+     [ngClass]="{shop: !cart.isRefreshing, loading: cart.isRefreshing, spinner: cart.isRefreshing}"
   ></i>
 
   <a class="ui red floating circular label" *ngIf="cart?.totals?.items_qty > 0">{{cart.totals.items_qty}}</a>
-  Cart / Checkout
+  Cart
 </a>
 <a class="item" [routerLink]="['Me']">
   <i class="user icon"></i>

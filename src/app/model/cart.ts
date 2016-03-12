@@ -61,7 +61,7 @@ export class Cart {
           }).then((data: any) => {
             console.log('Add to cart: ', data.obj);
             product.isAdding = false;
-            resolve();
+            resolve(data.obj);
           });
         });
       });

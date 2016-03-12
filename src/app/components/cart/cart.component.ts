@@ -6,13 +6,11 @@ import {Cart} from '../../model/cart';
   templateUrl: 'app/components/cart/cart.component.html',
 })
 export class CartComponent implements OnInit {
-  title = 'Cart';
 
   constructor(public cart: Cart, private _changeDetectorRef: ChangeDetectorRef) {
   }
 
   ngOnInit() {
-    // this.cart.refresh(false);
     // this.cart.refreshEvent.subscribe(() => this.show());
   }
 
