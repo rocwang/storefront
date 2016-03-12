@@ -10,6 +10,8 @@ import {Catalog} from '../../model/catalog';
 import {FeaturedComponent} from '../featured/featured.component';
 import {Featured} from '../../model/featured';
 import {NavComponent} from '../nav/navigation.component';
+import {Shipping} from '../../model/shipping';
+import {Payment} from '../../model/payment';
 
 @Component({
   selector   : 'app',
@@ -22,6 +24,8 @@ import {NavComponent} from '../nav/navigation.component';
     ChangeDetectorRef,
     Catalog,
     Featured,
+    Shipping,
+    Payment,
   ]
 })
 @RouteConfig([

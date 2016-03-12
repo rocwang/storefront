@@ -11,14 +11,14 @@
 <a id="nav-checkout"
    class="item"
    [routerLink]="['Checkout']"
-   [attr.data-title]="'Grand Total: ' + (cart.grand_total | currency:'NZD':true)"
+   [attr.data-title]="'Grand Total: ' + (cart?.totals?.grand_total | currency:'NZD':true)"
 >
   <i id="icon-cart"
      class="icon"
      [ngClass]="{payment: !cart.isRefreshing, loading: cart.isRefreshing, spinner: cart.isRefreshing}"
   ></i>
 
-  <a class="ui red floating circular label" *ngIf="cart.items_qty > 0">{{cart.items_qty}}</a>
+  <a class="ui red floating circular label" *ngIf="cart?.totals?.items_qty > 0">{{cart.totals.items_qty}}</a>
   Cart / Checkout
 </a>
 <a class="item" [routerLink]="['Me']">

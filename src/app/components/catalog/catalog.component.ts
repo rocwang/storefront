@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from 'angular2/core';
 import {Router} from 'angular2/router';
 import {MagentoService} from '../../services/magento.service';
-import {Product} from '../../model/product';
+import {Product} from '../../typings/product';
 import {Cart} from '../../model/cart';
 import {Catalog} from '../../model/catalog';
 

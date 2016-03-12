@@ -1,6 +1,6 @@
 import {Injectable} from 'angular2/core';
 import {MagentoService} from '../services/magento.service';
-import {Product} from './product';
+import {Product} from './../typings/product';
 
 @Injectable()
 export class Catalog {
