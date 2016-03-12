@@ -63,7 +63,7 @@ export class CatalogComponent implements OnInit {
       opacity           : 1,
       'transform-origin': 'top left',
       transition        : 'transform 1s cubic-bezier(0.6, -0.28, 0.735, 0.045), opacity 1s cubic-bezier(0.6, -0.28, 0.735, 0.045)',
-      'z-index'         : 1000
+      'z-index'         : 110
     }).appendTo('body');
 
     return new Promise(resolve => {

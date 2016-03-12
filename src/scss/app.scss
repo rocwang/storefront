@@ -25,3 +25,7 @@ $sidebar-bg : #fff;
 .ui.cards > .card {
   flex : 1 1 auto;
 }
+
+.header.ui.menu.fixed {
+  z-index : 120;
+}

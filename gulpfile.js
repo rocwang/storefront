@@ -53,10 +53,10 @@ var basePaths = {
 
 // paths definitions
 var srcFiles = {
-  scss     : [
+  scss    : [
     '**/*.scss',
   ],
-  js       : [
+  js      : [
     "node_modules/swagger-client/browser/swagger-client.js",
     "node_modules/jquery/dist/jquery.js",
     "node_modules/es6-shim/es6-shim.min.js",
@@ -67,19 +67,19 @@ var srcFiles = {
     "node_modules/angular2/bundles/angular2.dev.js",
     "node_modules/angular2/bundles/router.dev.js",
   ],
-  ts       : [
+  ts      : [
     '**/*.ts',
   ],
-  img      : [
+  img     : [
     'img/**',
   ],
-  sprite   : [
+  sprite  : [
     'sprite/*.svg',
   ],
-  html     : [
+  html    : [
     '**/*.html',
   ],
-  semantic : [
+  semantic: [
     "semantic/dist/**",
   ],
 };
@@ -108,6 +108,7 @@ gulp.task('scss', ['scsslint'], function () {
     .pipe(nano({
       discardComments: {removeAll: true},
       discardUnused  : {fontFace: false},
+      zindex         : false,
     }))
     .pipe(autoprefixer({
       browsers: ['last 2 versions', 'ie >= 10'],
@@ -243,8 +244,8 @@ gulp.task('watch', ['default'], function () {
 
   browserSync({
     server: {
-      baseDir: basePaths.test,
-      middleware: [ historyApiFallback() ],
+      baseDir   : basePaths.test,
+      middleware: [historyApiFallback()],
     },
     open  : false,
   });
