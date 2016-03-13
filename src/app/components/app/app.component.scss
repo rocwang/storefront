@@ -5,9 +5,19 @@
   right    : 0;
   height   : calc(100vh - 38.125px - 72px);
   overflow : auto;
-  padding  : 14px;
 }
 
-.header.ui.menu.fixed {
+.top-basr.ui.menu.fixed {
   z-index : 120;
+}
+
+.ui.menu .item.header {
+  flex-grow  : 1;
+  display    : block;
+  text-align : center;
+}
+
+.header-inner {
+  position : relative;
+  left     : (204px - 56px) / 2;
 }

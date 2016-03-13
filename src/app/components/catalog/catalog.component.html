@@ -1,4 +1,4 @@
-<div class="ui link cards">
+<div class="ui link cards" *ngIf="products.length">
   <div class="card" *ngFor="#product of products">
 
     <div class="image">
@@ -20,5 +20,11 @@
       </button>
     </div>
 
+  </div>
+</div>
+
+<div class="ui dimmable dimmed" style="height: 100%" *ngIf="!products.length">
+  <div class="ui simple dimmer">
+    <div class="ui text loader">Loading</div>
   </div>
 </div>

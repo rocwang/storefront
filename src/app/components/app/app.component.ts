@@ -36,7 +36,7 @@ import {Payment} from '../../model/payment';
   {path: '/me', name: 'Me', component: MeComponent},
 ])
 export class AppComponent {
-  title = 'Storefront';
+  name = 'Storefront';
 
   @ViewChild(CartComponent)
   private _cartComponent: CartComponent;

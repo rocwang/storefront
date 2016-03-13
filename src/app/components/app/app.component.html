@@ -1,5 +1,17 @@
-<header class="ui small top fixed menu header">
-  <div class="header item">{{title}}</div>
+<header class="ui small top fixed menu top-bar">
+  <a class="item">back</a>
+
+  <div class="header item">
+    <span class="header-inner">{{name}}</span>
+  </div>
+
+  <div class="ui search item">
+    <div class="ui transparent icon input">
+      <input class="prompt" type="text" placeholder="Search catalog...">
+      <i class="search link icon"></i>
+    </div>
+    <div class="results"></div>
+  </div>
 </header>
 
 <div class="app-body">

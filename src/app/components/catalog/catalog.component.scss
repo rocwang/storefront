@@ -1,4 +1,7 @@
-.ui.cards > .card {
-  flex : 1 1 auto;
-}
+.ui.cards {
+  padding : 14px;
 
+  > .card {
+    flex : 1 1 auto;
+  }
+}

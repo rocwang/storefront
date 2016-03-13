@@ -11,7 +11,7 @@ import {Catalog} from '../../model/catalog';
   styleUrls: ['app/components/catalog/catalog.component.css'],
 })
 export class CatalogComponent implements OnInit {
-  products: Product[];
+  products: Product[] = [];
   title = 'Catalog';
 
   constructor(private catalog: Catalog,
