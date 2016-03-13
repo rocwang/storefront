@@ -51,7 +51,6 @@ linters:
     enabled: true
 
   ExtendDirective:
-  tyl
     enabled: false
 
   FinalNewline:
