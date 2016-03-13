@@ -9,6 +9,7 @@ import {CartComponent} from '../cart/cart.component';
 @Component({
   selector   : 'checkout',
   templateUrl: 'app/components/checkout/checkout.component.html',
+  styleUrls  : ['app/components/checkout/checkout.component.css'],
   directives : [CartComponent, ShippingAddressComponent, ShippingMethodComponent, PaymentMethodComponent],
 })
 export class CheckoutComponent implements OnInit {

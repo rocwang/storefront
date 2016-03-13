@@ -23,8 +23,4 @@
   </div>
 </div>
 
-<div class="ui dimmable dimmed" style="height: 100%" *ngIf="!products.length">
-  <div class="ui simple dimmer">
-    <div class="ui text loader">Loading</div>
-  </div>
-</div>
+<div class="ui text active loader" *ngIf="!products.length">Loading</div>
