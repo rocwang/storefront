@@ -20,13 +20,6 @@ export class Featured {
         this._magento.getSwaggerClient().then(api => {
 
           this._content = `
-<style>
-.blocks-promo .block-promo,
-.blocks-promo .info,
-.blocks-promo .title,
-.blocks-promo .action { display: block; }
-</style>
-
 <div class="blocks-promo">
    <a href="http://m2.rocwang.me/collections/yoga-new.html" class="block-promo home-main">
        <img src="http://m2.rocwang.me/media/wysiwyg/home/home-main.jpg" alt="">

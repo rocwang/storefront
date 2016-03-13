@@ -1,3 +1,5 @@
+exclude: 'src/app/components/featured/featured.component.scss'
+
 linters:
   BangFormat:
     enabled: true
@@ -49,6 +51,7 @@ linters:
     enabled: true
 
   ExtendDirective:
+  tyl
     enabled: false
 
   FinalNewline:
