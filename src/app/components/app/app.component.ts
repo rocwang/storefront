@@ -16,6 +16,7 @@ import {Payment} from '../../model/payment';
 @Component({
   selector   : 'app',
   templateUrl: 'app/components/app/app.component.html',
+  styleUrls: ['app/components/app/app.component.css'],
   directives : [ROUTER_DIRECTIVES, CartComponent, NavComponent],
   providers  : [
     ROUTER_PROVIDERS,
@@ -26,7 +27,7 @@ import {Payment} from '../../model/payment';
     Featured,
     Shipping,
     Payment,
-  ]
+  ],
 })
 @RouteConfig([
   {path: '/featured', name: 'Featured', component: FeaturedComponent, useAsDefault: true},

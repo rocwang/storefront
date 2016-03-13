@@ -8,6 +8,7 @@ import {Catalog} from '../../model/catalog';
 @Component({
   selector   : 'catalog',
   templateUrl: 'app/components/catalog/catalog.component.html',
+  styleUrls: ['app/components/catalog/catalog.component.css'],
 })
 export class CatalogComponent implements OnInit {
   products: Product[];

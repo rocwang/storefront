@@ -13,6 +13,7 @@ import {Featured} from '../../model/featured';
 @Component({
   selector   : 'nav',
   templateUrl: 'app/components/nav/nav.component.html',
+  styleUrls: ['app/components/nav/nav.component.css'],
   directives : [ROUTER_DIRECTIVES],
 })
 export class NavComponent implements OnInit {

@@ -4,6 +4,7 @@ import {Cart} from '../../model/cart';
 @Component({
   selector   : 'cart',
   templateUrl: 'app/components/cart/cart.component.html',
+  styleUrls: ['app/components/cart/cart.component.css'],
 })
 export class CartComponent implements OnInit {
 

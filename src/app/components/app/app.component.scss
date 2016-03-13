@@ -1,0 +1,13 @@
+.app-body {
+  position : fixed;
+  top      : 38.125px;
+  left     : 0;
+  right    : 0;
+  height   : calc(100vh - 38.125px - 72px);
+  overflow : auto;
+  padding  : 14px;
+}
+
+.header.ui.menu.fixed {
+  z-index : 120;
+}

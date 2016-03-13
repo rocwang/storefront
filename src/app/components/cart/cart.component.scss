@@ -1,0 +1,14 @@
+.cart-wrapper {
+  display   : flex;
+  flex-flow : column nowrap;
+  height    : calc(100vh - 38.125px - 72px - 28px);
+}
+
+.ui.items {
+  overflow : auto;
+  flex     : 1 1 auto;
+}
+
+.ui.table {
+  flex : 1 1 auto;
+}

@@ -98,7 +98,7 @@ gulp.task('scsslint', function () {
 });
 
 gulp.task('scss', ['scsslint'], function () {
-  return gulp.src(srcFiles.scss, {cwd: basePaths.src + 'scss'})
+  return gulp.src(srcFiles.scss, {cwd: basePaths.src, base: basePaths.src})
     .pipe(plumber({errorHandler: onError}))
     .pipe(isProduction ? util.noop() : sourcemaps.init())
     .pipe(sass({
@@ -115,7 +115,7 @@ gulp.task('scss', ['scsslint'], function () {
       cascade : false,
     }))
     .pipe(isProduction ? util.noop() : sourcemaps.write('.'))
-    .pipe(gulp.dest(basePaths.test + 'css'))
+    .pipe(gulp.dest(basePaths.test))
     .pipe(browserSync.stream({match: '**/*.css'}));
 });
 

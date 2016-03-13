@@ -1,0 +1,9 @@
+$menu-active-color : rgba(0, 0, 0, .95);
+$menu-active-bg-color : rgba(0, 0, 0, .05);
+
+.ui.menu .router-link-active.item {
+  background  : $menu-active-bg-color;
+  color       : $menu-active-color;
+  font-weight : normal;
+  box-shadow  : none;
+}
