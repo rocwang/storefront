@@ -1,9 +1,9 @@
 import {Injectable} from 'angular2/core';
-import {MagentoService} from '../services/magento.service';
-import {Product} from './../typings/product';
+import {MagentoService} from './magento.service';
+import {Product} from './../typings/product.d';
 
 @Injectable()
-export class Catalog {
+export class CatalogService {
   private _items: Array<any>;
 
   constructor(private _magento: MagentoService) {
@@ -25,7 +25,7 @@ export class Catalog {
             'searchCriteria[filter_groups][0][filters][0][value]'         : '4',
             'searchCriteria[filter_groups][0][filters][0][condition_type]': 'equal',
             'searchCriteria[pageSize]'                                    : 24,
-            'searchCriteria[currentPage]'                                 : 1,
+            'searchCriteria[currentPage]': 1,
           }).then((data: any) => {
             console.log('Products:', data.obj);
 

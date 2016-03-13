@@ -1,12 +1,12 @@
 import {Injectable} from 'angular2/core';
-import {MagentoService} from '../services/magento.service';
-import {Cart} from './cart';
-import {ShippingMethod} from '../typings/shipping-method';
-import {Payment} from './payment';
-import {Address} from '../typings/adress';
+import {MagentoService} from './magento.service';
+import {CartService} from './cart.service';
+import {ShippingMethod} from '../typings/shipping-method.d';
+import {PaymentService} from './payment.service';
+import {Address} from '../typings/adress.d';
 
 @Injectable()
-export class Shipping {
+export class ShippingService {
   selectedMethod: ShippingMethod;
   selectedAddress: Address = {
     region    : '',
@@ -24,7 +24,7 @@ export class Shipping {
   };
   availableMethods: Array<ShippingMethod> = [];
 
-  constructor(private _magento: MagentoService, private _cart: Cart, private _payment: Payment) {
+  constructor(private _magento: MagentoService, private _cart: CartService, private _payment: PaymentService) {
   }
 
   getShippingMethodsByAddr(): Promise<any> {

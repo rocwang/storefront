@@ -2,8 +2,8 @@ import {Component, OnInit, ViewChild} from 'angular2/core';
 import {Router} from 'angular2/router';
 import {MagentoService} from '../../services/magento.service';
 import {Product} from '../../typings/product';
-import {Cart} from '../../model/cart';
-import {Catalog} from '../../model/catalog';
+import {CartService} from '../../services/cart.service';
+import {CatalogService} from '../../services/catalog.service';
 
 @Component({
   selector   : 'catalog',
@@ -14,8 +14,8 @@ export class CatalogComponent implements OnInit {
   products: Product[] = [];
   title = 'Catalog';
 
-  constructor(private catalog: Catalog,
-              private _cart: Cart) {
+  constructor(private catalog: CatalogService,
+              private _cart: CartService) {
   }
 
   ngOnInit() {

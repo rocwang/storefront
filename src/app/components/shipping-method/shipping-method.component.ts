@@ -1,5 +1,5 @@
 import {Component, OnInit, ChangeDetectorRef} from 'angular2/core';
-import {Shipping} from '../../model/shipping';
+import {ShippingService} from '../../services/shipping.service';
 
 @Component({
   selector   : 'shipping-method',
@@ -7,7 +7,7 @@ import {Shipping} from '../../model/shipping';
 })
 export class ShippingMethodComponent implements OnInit {
 
-  constructor(public shipping: Shipping, private _changeDetectorRef: ChangeDetectorRef) {
+  constructor(public shipping: ShippingService, private _changeDetectorRef: ChangeDetectorRef) {
   }
 
   ngOnInit() {

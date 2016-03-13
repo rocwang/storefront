@@ -3,30 +3,30 @@ import {Router, RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2
 import {CatalogComponent} from '../catalog/catalog.component';
 import {MagentoService} from '../../services/magento.service';
 import {CartComponent} from '../cart/cart.component';
-import {Cart} from '../../model/cart';
+import {CartService} from '../../services/cart.service';
 import {CheckoutComponent} from '../checkout/checkout.component';
 import {MeComponent} from '../me/me.component';
-import {Catalog} from '../../model/catalog';
+import {CatalogService} from '../../services/catalog.service';
 import {FeaturedComponent} from '../featured/featured.component';
-import {Featured} from '../../model/featured';
+import {FeaturedService} from '../../services/featured.service';
 import {NavComponent} from '../nav/navigation.component';
-import {Shipping} from '../../model/shipping';
-import {Payment} from '../../model/payment';
+import {ShippingService} from '../../services/shipping.service';
+import {PaymentService} from '../../services/payment.service';
 
 @Component({
   selector   : 'app',
   templateUrl: 'app/components/app/app.component.html',
-  styleUrls: ['app/components/app/app.component.css'],
+  styleUrls  : ['app/components/app/app.component.css'],
   directives : [ROUTER_DIRECTIVES, CartComponent, NavComponent],
   providers  : [
     ROUTER_PROVIDERS,
     MagentoService,
-    Cart,
+    CartService,
     ChangeDetectorRef,
-    Catalog,
-    Featured,
-    Shipping,
-    Payment,
+    CatalogService,
+    FeaturedService,
+    ShippingService,
+    PaymentService,
   ],
 })
 @RouteConfig([

@@ -1,10 +1,10 @@
 import {Injectable, EventEmitter} from 'angular2/core';
-import {MagentoService} from '../services/magento.service';
-import {Product} from './../typings/product';
-import {Totals} from '../typings/totals';
+import {MagentoService} from './magento.service';
+import {Product} from './../typings/product.d';
+import {Totals} from '../typings/totals.d';
 
 @Injectable()
-export class Cart {
+export class CartService {
   private _STORAGE_KEY = 'cart-id';
 
   refreshEvent: EventEmitter<any> = new EventEmitter();

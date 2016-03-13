@@ -1,5 +1,5 @@
 import {Component, OnInit, Input, ChangeDetectorRef} from 'angular2/core';
-import {Cart} from '../../model/cart';
+import {CartService} from '../../services/cart.service';
 
 @Component({
   selector   : 'cart',
@@ -8,7 +8,7 @@ import {Cart} from '../../model/cart';
 })
 export class CartComponent implements OnInit {
 
-  constructor(public cart: Cart, private _changeDetectorRef: ChangeDetectorRef) {
+  constructor(public cart: CartService, private _changeDetectorRef: ChangeDetectorRef) {
   }
 
   ngOnInit() {

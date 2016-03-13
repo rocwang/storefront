@@ -1,8 +1,8 @@
 import {Injectable} from 'angular2/core';
-import {MagentoService} from '../services/magento.service';
+import {MagentoService} from './magento.service';
 
 @Injectable()
-export class Featured {
+export class FeaturedService {
   private _content: string;
 
   constructor(private _magento: MagentoService) {

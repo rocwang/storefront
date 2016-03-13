@@ -1,5 +1,5 @@
 import {Component, OnInit} from 'angular2/core';
-import {Featured} from '../../model/featured';
+import {FeaturedService} from '../../services/featured.service';
 
 @Component({
   selector   : 'catalog',
@@ -9,7 +9,7 @@ import {Featured} from '../../model/featured';
 export class FeaturedComponent implements OnInit {
   content: string;
 
-  constructor(private _featured: Featured) {
+  constructor(private _featured: FeaturedService) {
   }
 
   ngOnInit() {

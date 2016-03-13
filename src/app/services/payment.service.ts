@@ -1,16 +1,16 @@
 import {Injectable} from 'angular2/core';
-import {MagentoService} from '../services/magento.service';
-import {Cart} from './cart';
-import {PaymentMethod} from '../typings/payment-method';
+import {MagentoService} from './magento.service';
+import {CartService} from './cart.service';
+import {PaymentMethod} from '../typings/payment-method.d';
 
 @Injectable()
-export class Payment {
+export class PaymentService {
   code: string;
   title: string;
   availableMethods: Array<PaymentMethod>;
   selectedMethod: PaymentMethod;
 
-  constructor(private _magento: MagentoService, private _cart: Cart) {
+  constructor(private _magento: MagentoService, private _cart: CartService) {
   }
 
   savePaymentInforAndPlaceOrderPost(email: string, paymentMethodCode: string): Promise<any> {

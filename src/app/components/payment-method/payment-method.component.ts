@@ -1,5 +1,5 @@
 import {Component, OnInit, ChangeDetectorRef} from 'angular2/core';
-import {Payment} from '../../model/payment';
+import {PaymentService} from '../../services/payment.service';
 
 @Component({
   selector   : 'payment-method',
@@ -7,7 +7,7 @@ import {Payment} from '../../model/payment';
 })
 export class PaymentMethodComponent implements OnInit {
 
-  constructor(public payment: Payment, private _changeDetectorRef: ChangeDetectorRef) {
+  constructor(public payment: PaymentService, private _changeDetectorRef: ChangeDetectorRef) {
   }
 
   ngOnInit() {
