@@ -19,9 +19,10 @@ export class CatalogComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.catalog.getItems().then((products: Array<Product>) => {
-      this.products = products;
-    });
+    this.catalog.getProducts().subscribe(
+      products => this.products = products,
+      error => console.log('Server Error! Remember to show some user friendly message!')
+    );
   }
 
   add(product: Product, productImg: HTMLElement) {

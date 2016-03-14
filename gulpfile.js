@@ -57,6 +57,7 @@ var srcFiles = {
     '**/*.scss',
   ],
   js      : [
+    "src/js/elevator.js",
     "node_modules/swagger-client/browser/swagger-client.js",
     "node_modules/jquery/dist/jquery.js",
 
@@ -69,6 +70,7 @@ var srcFiles = {
     "node_modules/rxjs/bundles/Rx.js",
     "node_modules/angular2/bundles/angular2.dev.js",
     "node_modules/angular2/bundles/router.dev.js",
+    "node_modules/angular2/bundles/http.dev.js"
   ],
   ts      : [
     '**/*.ts',
@@ -85,7 +87,19 @@ var srcFiles = {
   semantic: [
     "semantic/dist/**",
   ],
+  misc : [
+    "audio/**/*.mp3",
+  ]
 };
+
+gulp.task('misc', function () {
+  return gulp.src(srcFiles.misc, {
+      cwd : basePaths.src,
+      base: basePaths.src,
+    })
+    .pipe(plumber({errorHandler: onError}))
+    .pipe(gulp.dest(basePaths.test));
+});
 
 gulp.task('clean', function (cb) {
   del([

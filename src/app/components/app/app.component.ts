@@ -1,4 +1,5 @@
 import {Component, ViewChild, ChangeDetectorRef} from 'angular2/core';
+import {HTTP_PROVIDERS} from 'angular2/http';
 import {Router, RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
 import {CatalogComponent} from '../catalog/catalog.component';
 import {MagentoService} from '../../services/magento.service';
@@ -12,6 +13,8 @@ import {FeaturedService} from '../../services/featured.service';
 import {NavComponent} from '../nav/navigation.component';
 import {ShippingService} from '../../services/shipping.service';
 import {PaymentService} from '../../services/payment.service';
+
+declare var Elevator: any;
 
 @Component({
   selector   : 'app',
@@ -27,6 +30,7 @@ import {PaymentService} from '../../services/payment.service';
     FeaturedService,
     ShippingService,
     PaymentService,
+    HTTP_PROVIDERS,
   ],
 })
 @RouteConfig([
@@ -47,5 +51,16 @@ export class AppComponent {
 
   toggleCart() {
     this._cartComponent.toggle();
+  }
+
+  backToTop() {
+
+    // Simple elevator usage.
+    var elevator = new Elevator({
+      mainAudio: '/audio/elevator.mp3', // Music from http://www.bensound.com/
+      endAudio : '/audio/ding.mp3'
+    });
+    elevator.elevate();
+
   }
 }

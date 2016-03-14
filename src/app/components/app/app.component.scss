@@ -1,10 +1,7 @@
 .app-body {
-  position : fixed;
-  top      : 38.125px;
-  left     : 0;
-  right    : 0;
-  height   : calc(100vh - 38.125px - 72px);
-  overflow : auto;
+  padding-top    : 38.125px;
+  padding-bottom : 72px;
+  overflow       : auto;
 }
 
 .top-bar.ui.menu.fixed {
