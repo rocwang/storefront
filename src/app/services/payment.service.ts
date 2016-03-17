@@ -16,7 +16,7 @@ export class PaymentService {
   savePaymentInforAndPlaceOrderPost(email: string, paymentMethodCode: string): Promise<any> {
 
     return new Promise(resolve => {
-      this._cart.getCardId().then(cartId => {
+      this._cart.getCardId().subscribe(cartId => {
         this._magento.getSwaggerClient().then(api => {
           api.checkoutGuestPaymentInformationManagementV1.checkoutGuestPaymentInformationManagementV1SavePaymentInformationAndPlaceOrderPost({
 
@@ -47,7 +47,7 @@ export class PaymentService {
   getMethods(): Promise<Array<PaymentMethod>> {
 
     return new Promise(resolve => {
-      this._cart.getCardId().then(cartId => {
+      this._cart.getCardId().subscribe(cartId => {
         this._magento.getSwaggerClient().then(api => {
           api.quoteGuestPaymentMethodManagementV1.quoteGuestPaymentMethodManagementV1GetListGet({
             cartId: cartId,

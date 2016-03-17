@@ -30,7 +30,7 @@ export class ShippingService {
   getShippingMethodsByAddr(): Promise<any> {
 
     return new Promise(resolve => {
-      this._cart.getCardId().then(cartId => {
+      this._cart.getCardId().subscribe(cartId => {
         this._magento.getSwaggerClient().then(api => {
           api.quoteGuestShippingMethodManagementV1.quoteGuestShippingMethodManagementV1EstimateByAddressPost({
 
@@ -60,7 +60,7 @@ export class ShippingService {
   getShippingMethodsByCart(): Promise<any> {
 
     return new Promise(resolve => {
-      this._cart.getCardId().then(cartId => {
+      this._cart.getCardId().subscribe(cartId => {
         this._magento.getSwaggerClient().then(api => {
           api.quoteGuestShippingMethodManagementV1.quoteGuestShippingMethodManagementV1GetListGet({
 
@@ -83,7 +83,7 @@ export class ShippingService {
   saveShippingInfoAndGetPaymentMethods(): Promise<any> {
 
     return new Promise(resolve => {
-      this._cart.getCardId().then(cartId => {
+      this._cart.getCardId().subscribe(cartId => {
         this._magento.getSwaggerClient().then(api => {
           api.checkoutGuestShippingInformationManagementV1.checkoutGuestShippingInformationManagementV1SaveAddressInformationPost({
             cartId: cartId,

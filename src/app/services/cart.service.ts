@@ -2,6 +2,9 @@ import {Injectable, EventEmitter} from 'angular2/core';
 import {MagentoService} from './magento.service';
 import {Product} from './../typings/product.d';
 import {Totals} from '../typings/totals.d';
+import {Http, Response, Headers, RequestOptions, URLSearchParams} from 'angular2/http';
+import {Observable} from 'rxjs/Observable';
+import {Subscriber} from 'rxjs/Subscriber';
 
 @Injectable()
 export class CartService {
@@ -11,91 +14,108 @@ export class CartService {
   isRefreshing = false;
   totals: Totals;
 
-  constructor(private _magento: MagentoService) {
+  constructor(private _magento: MagentoService, private http: Http) {
     this.refresh();
   }
 
   reset() {
-      localStorage.removeItem(this._STORAGE_KEY);
-      this.refresh();
+    localStorage.removeItem(this._STORAGE_KEY);
+    this.refresh();
   }
 
-  getCardId(): Promise<string> {
+  add(product: Product) {
+    return new Observable<Product[]>((observer: Subscriber<any>) => {
+
+      this.getCardId().subscribe(cartId => {
+
+        let body = JSON.stringify({
+          cartItem: {
+            quote_id: cartId,
+            sku     : product.sku,
+            qty     : 1,
+          }
+        });
+
+        let headers = new Headers({'Content-Type': 'application/json'});
+        let options = new RequestOptions({headers: headers});
+
+        return this.http.post('http://m2.rocwang.me/rest/V1/guest-carts/' + cartId + '/items', body, options)
+          .subscribe(response => {
+
+            var cartItem = response.json();
+            console.log('Add to cart: ', cartItem);
+
+            observer.next(cartItem);
+
+          });
+      });
+
+    });
+  }
+
+  getCardId(): Observable<string> {
     var cartId = localStorage.getItem(this._STORAGE_KEY);
 
     if (cartId) {
 
-      return Promise.resolve(cartId);
+      return Observable.of(cartId);
 
     } else {
 
-      return new Promise<string>(resolve => {
-        this._magento.getSwaggerClient().then(api => {
-          api.quoteGuestCartManagementV1.quoteGuestCartManagementV1CreateEmptyCartPost().then((data: any) => {
-            console.log('Cart Id:', data);
-            var cartId = data.data.replace(/"/g, '');
-            localStorage.setItem(this._STORAGE_KEY, cartId);
-            resolve(cartId);
-          });
-        });
-      });
+      let headers = new Headers({'Content-Type': 'application/json'});
+      let options = new RequestOptions({headers: headers});
+
+      return this.http.post('http://m2.rocwang.me/rest/V1/guest-carts', '', options)
+        .map(res => {
+
+          var cartId = res.text().replace(/"/g, '');
+          console.log('Cart Id:', cartId);
+          localStorage.setItem(this._STORAGE_KEY, cartId);
+
+          return cartId;
+
+        }).catch(this._handleError);
+
     }
   }
 
-  add(product: Product) {
-    product.isAdding = true;
+  refresh(triggerEvent = false) {
+    this.isRefreshing = true;
 
-    return new Promise(resolve => {
+    return new Observable<Totals>((observer: Subscriber<Totals>) => {
 
-      this.getCardId().then(cartId => {
-        this._magento.getSwaggerClient().then(api => {
-          api.quoteGuestCartItemRepositoryV1.quoteGuestCartItemRepositoryV1SavePost({
-            cartId: cartId,
-            $body : {
-              'cartItem': {
-                'quote_id': cartId,
-                'sku'     : product.sku,
-                'qty'     : 1,
-              }
-            }
-          }).then((data: any) => {
-            console.log('Add to cart: ', data.obj);
-            product.isAdding = false;
-            resolve(data.obj);
+      this.getCardId().subscribe(cartId => {
+
+        let headers = new Headers({'Content-Type': 'application/json'});
+        let options = new RequestOptions({headers: headers});
+
+        return this.http.get('http://m2.rocwang.me/rest/V1/guest-carts/' + cartId + '/totals', options)
+          .map(res => <Totals>res.json())
+          .catch(this._handleError)
+          .subscribe(totals => {
+
+            observer.next(totals);
+
           });
-        });
       });
+    }).subscribe(totals => {
+
+      this.totals = totals;
+      console.log('Totals:', this.totals);
+
+      if (triggerEvent) {
+        this.refreshEvent.emit(this.totals);
+      }
+
+      this.isRefreshing = false;
 
     });
   }
 
-  // Refresh cart
-  refresh(triggerEvent = false) {
-    this.isRefreshing = true;
-    return new Promise(resolve => {
-
-      this.getCardId().then(cartId => {
-        this._magento.getSwaggerClient().then(api => {
-
-          api.quoteGuestCartTotalRepositoryV1.quoteGuestCartTotalRepositoryV1GetGet({
-            cartId: cartId,
-          }).then((data: any) => {
-            console.log('Cart:', data.obj);
-
-            this.totals = data.obj;
-
-            if (triggerEvent) {
-              this.refreshEvent.emit(null);
-            }
-
-            this.isRefreshing = false;
-
-            resolve(this.totals);
-
-          });
-        });
-      });
-
-    });
+  private _handleError(error: Response) {
+    // in a real world app, we may send the error to some remote logging infrastructure
+    // instead of just logging it to the console
+    console.error(error.json());
+    return Observable.throw(error.json() || 'Server error');
   }
 }

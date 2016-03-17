@@ -28,7 +28,11 @@ export class CatalogComponent implements OnInit {
   add(product: Product, productImg: HTMLElement) {
     if (!product.isAdding) {
 
-      this._cart.add(product).then(() => {
+      product.isAdding = true;
+
+      this._cart.add(product).subscribe(() => {
+
+        product.isAdding = false;
 
         this.animate(productImg, '#icon-cart').then(() => {
 
@@ -53,7 +57,6 @@ export class CatalogComponent implements OnInit {
 
     var srcCoordinates = src.offset();
     var targetCoordinates = target.offset();
-    console.log(srcCoordinates, targetCoordinates);
 
     clone.css({
       position          : 'absolute',
