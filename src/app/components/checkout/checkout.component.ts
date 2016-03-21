@@ -1,6 +1,4 @@
-import {Component, OnInit, Input, ChangeDetectorRef} from 'angular2/core';
-import {CartService} from '../../services/cart.service';
-import {MagentoService} from '../../services/magento.service';
+import {Component, OnInit, ChangeDetectorRef} from 'angular2/core';
 import {ShippingMethodComponent} from '../shipping-method/shipping-method.component';
 import {ShippingAddressComponent} from '../shipping-address/shipping-address.component';
 import {PaymentMethodComponent} from '../payment-method/payment-method.component';
@@ -13,7 +11,7 @@ import {CartComponent} from '../cart/cart.component';
   directives : [CartComponent, ShippingAddressComponent, ShippingMethodComponent, PaymentMethodComponent],
 })
 export class CheckoutComponent implements OnInit {
-  constructor(public cart: CartService, private _changeDetectorRef: ChangeDetectorRef) {
+  constructor(private _changeDetectorRef: ChangeDetectorRef) {
   }
 
   ngOnInit() {

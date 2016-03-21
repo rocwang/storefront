@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, ChangeDetectorRef} from 'angular2/core';
+import {Component, OnInit, ChangeDetectorRef} from 'angular2/core';
 import {CartService} from '../../services/cart.service';
 
 @Component({
@@ -12,21 +12,5 @@ export class CartComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.cart.refreshEvent.subscribe(() => this.show());
-  }
-
-  show() {
-    this._changeDetectorRef.detectChanges();
-    $('.ui.sidebar')
-      .sidebar('setting', 'transition', 'push')
-      .sidebar('setting', 'mobileTransition', 'push')
-      .sidebar('show');
-  }
-
-  toggle() {
-    $('.ui.sidebar')
-      .sidebar('setting', 'transition', 'push')
-      .sidebar('setting', 'mobileTransition', 'push')
-      .sidebar('toggle');
   }
 }

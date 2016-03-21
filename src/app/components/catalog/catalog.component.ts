@@ -1,6 +1,4 @@
-import {Component, OnInit, ViewChild} from 'angular2/core';
-import {Router} from 'angular2/router';
-import {MagentoService} from '../../services/magento.service';
+import {Component, OnInit} from 'angular2/core';
 import {Product} from '../../typings/product';
 import {CartService} from '../../services/cart.service';
 import {CatalogService} from '../../services/catalog.service';

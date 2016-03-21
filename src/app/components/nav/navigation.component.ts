@@ -1,14 +1,6 @@
 import {Component, OnInit, ChangeDetectorRef} from 'angular2/core';
-import {Router, RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
-import {CatalogComponent} from '../catalog/catalog.component';
-import {MagentoService} from '../../services/magento.service';
-import {CartComponent} from '../cart/cart.component';
+import {ROUTER_DIRECTIVES} from 'angular2/router';
 import {CartService} from '../../services/cart.service';
-import {CheckoutComponent} from '../checkout/checkout.component';
-import {MeComponent} from '../me/me.component';
-import {CatalogService} from '../../services/catalog.service';
-import {FeaturedComponent} from '../featured/featured.component';
-import {FeaturedService} from '../../services/featured.service';
 
 @Component({
   selector   : 'nav',

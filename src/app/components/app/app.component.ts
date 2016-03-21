@@ -1,6 +1,6 @@
-import {Component, ViewChild, ChangeDetectorRef} from 'angular2/core';
+import {Component, ChangeDetectorRef} from 'angular2/core';
 import {HTTP_PROVIDERS} from 'angular2/http';
-import {Router, RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
+import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
 import {CatalogComponent} from '../catalog/catalog.component';
 import {MagentoService} from '../../services/magento.service';
 import {CartComponent} from '../cart/cart.component';
@@ -42,15 +42,8 @@ declare var Elevator: any;
 export class AppComponent {
   name = 'Storefront';
 
-  @ViewChild(CartComponent)
-  private _cartComponent: CartComponent;
 
-
-  constructor(private _router: Router, private _magento: MagentoService) {
-  }
-
-  toggleCart() {
-    this._cartComponent.toggle();
+  constructor() {
   }
 
   backToTop() {
