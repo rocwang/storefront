@@ -1,25 +1,27 @@
-<a class="item" [routerLink]="['Featured']">
-  <i class="star icon"></i>
-  Featured
-</a>
-<a class="item" [routerLink]="['Catalog']">
-  <i class="grid layout icon"></i>
-  Catalog
-</a>
-<a id="nav-checkout"
-   class="item"
-   [routerLink]="['Checkout']"
-   [attr.data-title]="'Grand Total: ' + (cart?.totals?.grand_total | currency:'NZD':true)"
->
-  <i id="icon-cart"
-     class="icon"
-     [ngClass]="{shop: !cart.isRefreshing, loading: cart.isRefreshing, spinner: cart.isRefreshing}"
-  ></i>
+<nav class="ui bottom fixed labeled icon fluid four item menu">
+  <a class="item" [routerLink]="['Featured']">
+    <i class="star icon"></i>
+    Featured
+  </a>
+  <a class="item" [routerLink]="['Catalog']">
+    <i class="grid layout icon"></i>
+    Catalog
+  </a>
+  <a id="nav-checkout"
+     class="item"
+     [routerLink]="['Checkout']"
+     [attr.data-title]="'Grand Total: ' + (cart?.totals?.grand_total | currency:'NZD':true)"
+  >
+    <i id="icon-cart"
+       class="icon"
+       [ngClass]="{shop: !cart.isRefreshing, loading: cart.isRefreshing, spinner: cart.isRefreshing}"
+    ></i>
 
-  <a class="ui red floating circular label" *ngIf="cart?.totals?.items_qty > 0">{{cart.totals.items_qty}}</a>
-  Cart
-</a>
-<a class="item" [routerLink]="['Me']">
-  <i class="user icon"></i>
-  Me
-</a>
+    <a class="ui red floating circular label" *ngIf="cart?.totals?.items_qty > 0">{{cart.totals.items_qty}}</a>
+    Cart
+  </a>
+  <a class="item" [routerLink]="['Me']">
+    <i class="user icon"></i>
+    Me
+  </a>
+</nav>

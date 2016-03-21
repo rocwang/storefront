@@ -3,7 +3,7 @@ import {ROUTER_DIRECTIVES} from 'angular2/router';
 import {CartService} from '../../services/cart.service';
 
 @Component({
-  selector   : 'nav',
+  selector   : 'navigation',
   templateUrl: 'app/components/nav/nav.component.html',
   styleUrls: ['app/components/nav/nav.component.css'],
   directives : [ROUTER_DIRECTIVES],
