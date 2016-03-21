@@ -1,4 +1,4 @@
-import {Component, OnInit, ChangeDetectorRef} from 'angular2/core';
+import {Component, OnInit} from 'angular2/core';
 import {ShippingService} from '../../services/shipping.service';
 
 @Component({
@@ -7,12 +7,11 @@ import {ShippingService} from '../../services/shipping.service';
 })
 export class ShippingMethodComponent implements OnInit {
 
-  constructor(public shipping: ShippingService, private _changeDetectorRef: ChangeDetectorRef) {
+  constructor(public shipping: ShippingService) {
   }
 
   ngOnInit() {
-    this.shipping.getShippingMethodsByCart().then(() => {
-      this._changeDetectorRef.detectChanges();
-    });
+    // Todo: Only call the following when having a shipping address in quote
+    // this.shipping.getShippingMethodsByCart();
   }
 }

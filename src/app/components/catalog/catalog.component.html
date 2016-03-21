@@ -1,5 +1,5 @@
-<div class="ui link cards" *ngIf="products.length">
-  <div class="card" *ngFor="#product of products">
+<div class="ui link cards" *ngIf="catalog.products?.length">
+  <div class="card" *ngFor="#product of catalog.products">
 
     <div class="image">
       <img src="{{product.imgSrc}}" #productImg>
@@ -23,4 +23,4 @@
   </div>
 </div>
 
-<div class="ui text active loader" *ngIf="!products.length">Loading</div>
+<div class="ui text active loader" *ngIf="!catalog.products?.length">Loading</div>

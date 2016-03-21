@@ -2,7 +2,7 @@ import {Injectable, EventEmitter} from 'angular2/core';
 import {MagentoService} from './magento.service';
 import {Product} from './../typings/product.d';
 import {Totals} from '../typings/totals.d';
-import {Http, Response, Headers, RequestOptions, URLSearchParams} from 'angular2/http';
+import {Http, Response, Headers, RequestOptions} from 'angular2/http';
 import {Observable} from 'rxjs/Observable';
 import {Subscriber} from 'rxjs/Subscriber';
 
@@ -14,7 +14,7 @@ export class CartService {
   isRefreshing = false;
   totals: Totals;
 
-  constructor(private _magento: MagentoService, private http: Http) {
+  constructor(private _magento: MagentoService, private _http: Http) {
     this.refresh();
   }
 
@@ -39,7 +39,7 @@ export class CartService {
         let headers = new Headers({'Content-Type': 'application/json'});
         let options = new RequestOptions({headers: headers});
 
-        return this.http.post('http://m2.rocwang.me/rest/V1/guest-carts/' + cartId + '/items', body, options)
+        return this._http.post('http://m2.rocwang.me/rest/V1/guest-carts/' + cartId + '/items', body, options)
           .subscribe(response => {
 
             var cartItem = response.json();
@@ -65,7 +65,7 @@ export class CartService {
       let headers = new Headers({'Content-Type': 'application/json'});
       let options = new RequestOptions({headers: headers});
 
-      return this.http.post('http://m2.rocwang.me/rest/V1/guest-carts', '', options)
+      return this._http.post('http://m2.rocwang.me/rest/V1/guest-carts', '', options)
         .map(res => {
 
           var cartId = res.text().replace(/"/g, '');
@@ -89,7 +89,7 @@ export class CartService {
         let headers = new Headers({'Content-Type': 'application/json'});
         let options = new RequestOptions({headers: headers});
 
-        return this.http.get('http://m2.rocwang.me/rest/V1/guest-carts/' + cartId + '/totals', options)
+        return this._http.get('http://m2.rocwang.me/rest/V1/guest-carts/' + cartId + '/totals', options)
           .map(res => <Totals>res.json())
           .catch(this._handleError)
           .subscribe(totals => {

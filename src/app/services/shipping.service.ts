@@ -4,107 +4,112 @@ import {CartService} from './cart.service';
 import {ShippingMethod} from '../typings/shipping-method.d';
 import {PaymentService} from './payment.service';
 import {Address} from '../typings/adress.d';
+import {Http, Headers, RequestOptions} from 'angular2/http';
 
 @Injectable()
 export class ShippingService {
-  selectedMethod: ShippingMethod;
   selectedAddress: Address = {
-    region    : '',
-    regionId  : 0,
-    countryId : 'us',
-    postcode  : '',
-    street    : ['', ''],
-    telephone : '',
-    city      : '',
-    firstname : '',
-    lastname  : '',
+    region: '',
+    regionId: 0,
+    countryId: 'us',
+    postcode: '',
+    street: ['', ''],
+    telephone: '',
+    city: '',
+    firstname: '',
+    lastname: '',
     methodCode: '',
     carrayCode: '',
-    company   : ''
+    company: ''
   };
-  availableMethods: Array<ShippingMethod> = [];
+  availableAddress: Address[] = [];
+  
+  selectedMethod: ShippingMethod;
+  availableMethods: ShippingMethod[] = [];
 
-  constructor(private _magento: MagentoService, private _cart: CartService, private _payment: PaymentService) {
+  constructor(private _magento: MagentoService,
+              private _cart: CartService,
+              private _payment: PaymentService,
+              private _http: Http) {
   }
 
-  getShippingMethodsByAddr(): Promise<any> {
+  getShippingMethodsByAddr() {
 
-    return new Promise(resolve => {
-      this._cart.getCardId().subscribe(cartId => {
-        this._magento.getSwaggerClient().then(api => {
-          api.quoteGuestShippingMethodManagementV1.quoteGuestShippingMethodManagementV1EstimateByAddressPost({
+    this._cart.getCardId().subscribe(cartId => {
 
-            cartId: cartId,
-            $body : {
-              address: {
-                region   : this.selectedAddress.region,
-                // regionId : 0,
-                countryId: this.selectedAddress.countryId,
-                postcode : this.selectedAddress.postcode,
-              }
-            }
-
-          }).then((data: any) => {
-
-            console.log('Shipping methods: ', data.obj);
-            this.availableMethods = data.obj;
-            resolve(this.availableMethods);
-
-          });
-        });
+      let body = JSON.stringify({
+        address: {
+          region: this.selectedAddress.region,
+          // regionId : 0,
+          countryId: this.selectedAddress.countryId,
+          postcode: this.selectedAddress.postcode,
+        }
       });
+
+      let headers = new Headers({'Content-Type': 'application/json'});
+      let options = new RequestOptions({headers: headers});
+
+      this._http.post(
+        'http://m2.rocwang.me/rest/V1/guest-carts/' + cartId + '/estimate-shipping-methods',
+        body,
+        options
+      ).map(response => response.json())
+        .subscribe((data) => {
+
+          console.log('Shipping methods: ', data);
+          this.availableMethods = data;
+
+        });
     });
 
   }
 
-  getShippingMethodsByCart(): Promise<any> {
+  getShippingMethodsByCart() {
 
-    return new Promise(resolve => {
-      this._cart.getCardId().subscribe(cartId => {
-        this._magento.getSwaggerClient().then(api => {
-          api.quoteGuestShippingMethodManagementV1.quoteGuestShippingMethodManagementV1GetListGet({
+    this._cart.getCardId().subscribe(cartId => {
 
-            cartId: cartId,
+      let headers = new Headers({'Content-Type': 'application/json'});
+      let options = new RequestOptions({headers: headers});
 
-          }).then((data: any) => {
+      return this._http.get('http://m2.rocwang.me/rest/V1/guest-carts/' + cartId + '/shipping-methods', options)
+        .map(response => response.json())
+        .subscribe((data: ShippingMethod[]) => {
 
-            console.log('Shipping methods by Cart: ', data.obj);
-            this.availableMethods = data.obj;
-            resolve(this.availableMethods);
-
-          });
+          console.log('Shipping methods by Cart: ', data);
+          this.availableMethods = data;
         });
-      });
     });
 
   }
 
 
-  saveShippingInfoAndGetPaymentMethods(): Promise<any> {
+  saveShippingInfoAndGetPaymentMethods() {
 
-    return new Promise(resolve => {
-      this._cart.getCardId().subscribe(cartId => {
-        this._magento.getSwaggerClient().then(api => {
-          api.checkoutGuestShippingInformationManagementV1.checkoutGuestShippingInformationManagementV1SaveAddressInformationPost({
-            cartId: cartId,
-            $body : {
-              addressInformation: {
-                shippingAddress    : this.selectedAddress,
-                billingAddress     : this.selectedAddress,
-                shippingMethodCode : this.selectedMethod.method_code,
-                shippingCarrierCode: this.selectedMethod.carrier_code
-              }
-            }
-          }).then((data: any) => {
+    this._cart.getCardId().subscribe(cartId => {
 
-            console.log('Available Payment Methods: ', data.obj);
-
-            this._payment.availableMethods = data.obj.payment_methods;
-            this._cart.totals = data.obj.totals;
-
-          });
-        });
+      let body = JSON.stringify({
+        addressInformation: {
+          shippingAddress: this.selectedAddress,
+          billingAddress: this.selectedAddress,
+          shippingMethodCode: this.selectedMethod.method_code,
+          shippingCarrierCode: this.selectedMethod.carrier_code
+        }
       });
+      let headers = new Headers({'Content-Type': 'application/json'});
+      let options = new RequestOptions({headers: headers});
+
+      this._http.post(
+        'http://m2.rocwang.me/rest/V1/guest-carts/' + cartId + '/shipping-information',
+        body,
+        options
+      ).map(response => response.json())
+        .subscribe((data: any) => {
+
+          console.log('Available Payment Methods: ', data);
+          this._payment.availableMethods = data.payment_methods;
+          this._cart.totals = data.totals;
+
+        });
     });
 
   }

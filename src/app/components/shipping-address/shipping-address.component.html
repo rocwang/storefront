@@ -30,19 +30,19 @@
     </div>
     <div class="field">
       <label>Zip/Post Code</label>
-      <input type="text" [(ngModel)]="shipping.selectedAddress.postcode" (change)="getShippingMethods($event)">
+      <input type="text" [(ngModel)]="shipping.selectedAddress.postcode" (change)="shipping.getShippingMethodsByAddr()">
     </div>
   </div>
 
   <div class="two fields">
     <div class="field">
       <label>State / Province</label>
-      <input type="text" [(ngModel)]="shipping.selectedAddress.region" (change)="getShippingMethods($event)">
+      <input type="text" [(ngModel)]="shipping.selectedAddress.region" (change)="shipping.getShippingMethodsByAddr()">
     </div>
     <div class="field">
       <label>Country</label>
       <country [(countryId)]="shipping.selectedAddress.countryId"
-               (countryIdChange)="getShippingMethods($event)"></country>
+               (countryIdChange)="shipping.getShippingMethodsByAddr()"></country>
     </div>
   </div>
 

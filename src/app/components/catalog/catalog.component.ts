@@ -9,7 +9,6 @@ import {CatalogService} from '../../services/catalog.service';
   styleUrls: ['app/components/catalog/catalog.component.css'],
 })
 export class CatalogComponent implements OnInit {
-  products: Product[] = [];
   title = 'Catalog';
 
   constructor(private catalog: CatalogService,
@@ -17,10 +16,7 @@ export class CatalogComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.catalog.getProducts().subscribe(
-      products => this.products = products,
-      error => console.log('Server Error! Remember to show some user friendly message!')
-    );
+    this.catalog.getProducts();
   }
 
   add(product: Product, productImg: HTMLElement) {

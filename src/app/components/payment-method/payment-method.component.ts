@@ -1,4 +1,4 @@
-import {Component, OnInit, ChangeDetectorRef} from 'angular2/core';
+import {Component, OnInit} from 'angular2/core';
 import {PaymentService} from '../../services/payment.service';
 
 @Component({
@@ -7,12 +7,10 @@ import {PaymentService} from '../../services/payment.service';
 })
 export class PaymentMethodComponent implements OnInit {
 
-  constructor(public payment: PaymentService, private _changeDetectorRef: ChangeDetectorRef) {
+  constructor(public payment: PaymentService) {
   }
 
   ngOnInit() {
-    this.payment.getMethods().then(() => {
-      this._changeDetectorRef.detectChanges();
-    });
+    this.payment.getMethods();
   }
 }

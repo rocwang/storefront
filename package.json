@@ -49,7 +49,6 @@
         "svg4everybody"               : "2.x",
         "jquery"                      : "2.x",
         "semantic-ui"                 : "2.x",
-        "swagger-client"              : "2.x",
         "angular2"                    : "2.0.0-beta.11",
         "systemjs"                    : "^0.19.24",
         "es6-promise"                 : "^3.0.2",

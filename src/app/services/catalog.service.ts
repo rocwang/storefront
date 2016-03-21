@@ -6,10 +6,16 @@ import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class CatalogService {
-  constructor(private _magento: MagentoService, private http: Http) {
+  public products: Product[];
+
+  constructor(private _magento: MagentoService, private _http: Http) {
   }
 
   getProducts() {
+    if (this.products) {
+      return;
+    }
+
     let headers = new Headers({'Content-Type': 'application/json'});
 
     var search = new URLSearchParams();
@@ -29,10 +35,12 @@ export class CatalogService {
 
     let options = new RequestOptions({headers: headers, search: search});
 
-    return this.http.get('http://m2.rocwang.me/rest/V1/products', options)
-      .map(res => {
+    return this._http.get('http://m2.rocwang.me/rest/V1/products', options)
+      .map(response => response.json())
+      .catch(this._handleError)
+      .subscribe(data => {
 
-        var products = <Product[]> res.json().items;
+        var products = <Product[]> data.items;
         console.log('Products: ', products);
 
         // Find the product image
@@ -46,9 +54,9 @@ export class CatalogService {
           product.isAdding = false;
         });
 
-        return products;
+        this.products = products;
 
-      }).catch(this._handleError);
+      });
   }
 
   private _handleError(error: Response) {

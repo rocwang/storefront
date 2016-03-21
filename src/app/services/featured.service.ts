@@ -1,25 +1,8 @@
 import {Injectable} from 'angular2/core';
-import {MagentoService} from './magento.service';
 
 @Injectable()
 export class FeaturedService {
-  private _content: string;
-
-  constructor(private _magento: MagentoService) {
-  }
-
-  getContent(): Promise<string> {
-
-    if (this._content) {
-
-      return Promise.resolve(this._content);
-
-    } else {
-
-      return new Promise(resolve => {
-        this._magento.getSwaggerClient().then(api => {
-
-          this._content = `
+  public content = `
 <div class="blocks-promo">
    <a href="http://m2.rocwang.me/collections/yoga-new.html" class="block-promo home-main">
        <img src="http://m2.rocwang.me/media/wysiwyg/home/home-main.jpg" alt="">
@@ -73,11 +56,4 @@ export class FeaturedService {
    </div>
 </div>
 `;
-          resolve(this._content);
-
-        });
-      });
-
-    }
-  }
 }

@@ -2,66 +2,63 @@ import {Injectable} from 'angular2/core';
 import {MagentoService} from './magento.service';
 import {CartService} from './cart.service';
 import {PaymentMethod} from '../typings/payment-method.d';
+import {Http, Headers, RequestOptions} from 'angular2/http';
 
 @Injectable()
 export class PaymentService {
-  code: string;
-  title: string;
-  availableMethods: Array<PaymentMethod>;
+  availableMethods: PaymentMethod[];
   selectedMethod: PaymentMethod;
 
-  constructor(private _magento: MagentoService, private _cart: CartService) {
+  constructor(private _magento: MagentoService, private _cart: CartService, private _http: Http) {
   }
 
-  savePaymentInforAndPlaceOrderPost(email: string, paymentMethodCode: string): Promise<any> {
+  savePaymentInforAndPlaceOrderPost(email: string, paymentMethodCode: string) {
 
-    return new Promise(resolve => {
-      this._cart.getCardId().subscribe(cartId => {
-        this._magento.getSwaggerClient().then(api => {
-          api.checkoutGuestPaymentInformationManagementV1.checkoutGuestPaymentInformationManagementV1SavePaymentInformationAndPlaceOrderPost({
+    this._cart.getCardId().subscribe(cartId => {
 
-            cartId: cartId,
-            $body : {
-              email        : email,
-              paymentMethod: {
-                poNumber      : null,
-                method        : paymentMethodCode,
-                additionalData: null,
-              }
-            }
-
-          }).then((data: any) => {
-
-            console.log('Place order: ', data.obj);
-            this._cart.reset();
-            resolve(data.obj);
-            alert('Order placed!');
-
-          });
-        });
+      let body = JSON.stringify({
+        email: email,
+        paymentMethod: {
+          poNumber: null,
+          method: paymentMethodCode,
+          additionalData: null,
+        }
       });
+      let headers = new Headers({'Content-Type': 'application/json'});
+      let options = new RequestOptions({headers: headers});
+
+      this._http.post(
+        'http://m2.rocwang.me/rest/V1/guest-carts/' + cartId + '/payment-information',
+        body,
+        options
+      ).map(response => response.json())
+        .subscribe(data => {
+
+          console.log('Place order: ', data);
+          this._cart.reset();
+          alert('Order placed!');
+
+        });
     });
 
   }
 
-  getMethods(): Promise<Array<PaymentMethod>> {
+  getMethods() {
 
-    return new Promise(resolve => {
-      this._cart.getCardId().subscribe(cartId => {
-        this._magento.getSwaggerClient().then(api => {
-          api.quoteGuestPaymentMethodManagementV1.quoteGuestPaymentMethodManagementV1GetListGet({
-            cartId: cartId,
-          }).then((data: any) => {
+    this._cart.getCardId().subscribe(cartId => {
 
-            console.log('Available Payment Methods: ', data.obj);
-            this.availableMethods = data.obj;
-            resolve(this.availableMethods);
+      let headers = new Headers({'Content-Type': 'application/json'});
+      let options = new RequestOptions({headers: headers});
 
-          });
+      return this._http.get('http://m2.rocwang.me/rest/V1/guest-carts/' + cartId + '/payment-methods', options)
+        .map(response => response.json())
+        .subscribe((data: PaymentMethod[]) => {
+
+          console.log('Available Payment Methods: ', data);
+          this.availableMethods = data;
+
         });
-      });
     });
 
   }
 }
-

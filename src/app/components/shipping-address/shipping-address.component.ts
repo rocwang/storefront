@@ -1,4 +1,4 @@
-import {Component, OnInit, ChangeDetectorRef} from 'angular2/core';
+import {Component, OnInit} from 'angular2/core';
 import {ShippingService} from '../../services/shipping.service';
 import {CountryComponent} from '../country/country.component';
 
@@ -9,13 +9,9 @@ import {CountryComponent} from '../country/country.component';
 })
 export class ShippingAddressComponent implements OnInit {
 
-  constructor(public shipping: ShippingService, private _changeDetectorRef: ChangeDetectorRef) {
+  constructor(public shipping: ShippingService) {
   }
 
   ngOnInit() {
-  }
-
-  getShippingMethods() {
-    this.shipping.getShippingMethodsByAddr();
   }
 }
