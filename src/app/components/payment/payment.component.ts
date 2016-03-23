@@ -2,10 +2,10 @@ import {Component, OnInit} from 'angular2/core';
 import {PaymentService} from '../../services/payment.service';
 
 @Component({
-  selector   : 'payment-method',
-  templateUrl: 'app/components/payment-method/payment-method.component.html',
+  selector   : 'payment',
+  templateUrl: 'app/components/payment/payment.component.html',
 })
-export class PaymentMethodComponent implements OnInit {
+export class PaymentComponent implements OnInit {
 
   constructor(public payment: PaymentService) {
   }

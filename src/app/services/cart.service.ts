@@ -112,6 +112,26 @@ export class CartService {
     });
   }
 
+  getCartData() {
+    return new Observable<any>((observer: Subscriber<any>) => {
+
+      this.getCardId().subscribe(cartId => {
+
+        let headers = new Headers({'Content-Type': 'application/json'});
+        let options = new RequestOptions({headers: headers});
+
+        return this._http.get('http://m2.rocwang.me/rest/V1/guest-carts/' + cartId, options)
+          .map(response => <any>response.json())
+          .catch(this._handleError)
+          .subscribe(data => {
+
+            observer.next(data);
+
+          });
+      });
+    });
+  }
+
   private _handleError(error: Response) {
     // in a real world app, we may send the error to some remote logging infrastructure
     // instead of just logging it to the console

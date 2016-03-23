@@ -3,15 +3,16 @@ import {ShippingService} from '../../services/shipping.service';
 import {CountryComponent} from '../country/country.component';
 
 @Component({
-  selector   : 'shipping-address',
-  templateUrl: 'app/components/shipping-address/shipping-address.component.html',
+  selector   : 'shipping',
+  templateUrl: 'app/components/shipping/shipping.component.html',
   directives : [CountryComponent],
 })
-export class ShippingAddressComponent implements OnInit {
+export class ShippingComponent implements OnInit {
 
   constructor(public shipping: ShippingService) {
   }
 
   ngOnInit() {
+    this.shipping.getShippingMethodsByAddr();
   }
 }

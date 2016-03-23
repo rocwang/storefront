@@ -4,14 +4,19 @@
   height    : calc(100vh - 38.125px - 72px - 28px);
 }
 
+.ui.header {
+  flex : 0 0 auto;
+}
+
 .ui.items {
-  overflow : auto;
-  flex     : 1 1 auto;
+  overflow      : auto;
+  flex          : 1 1 auto;
+  margin-top    : 0;
+  margin-bottom : 0;
 }
 
 .ui.table {
-  flex       : 1 1 auto;
-  margin-top : 0;
+  flex : 0 0 auto;
 }
 
 .grand-total {

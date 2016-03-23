@@ -1,6 +1,6 @@
-<form class="ui form">
-  <h2>Payment Methods</h2>
+<h2 class="ui dividing header">Payment</h2>
 
+<form class="ui form" [class.loading]="!payment.availableMethods?.length">
   <div class="grouped fields">
 
     <div class="field" *ngFor="#method of payment.availableMethods">

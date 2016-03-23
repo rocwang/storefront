@@ -1,5 +1,6 @@
 <form class="ui form">
-  <h2 class="ui dividing header">Shipping Information</h2>
+
+  <h2 class="ui dividing header">Shipping</h2>
 
   <div class="field">
     <div class="two fields">
@@ -15,7 +16,7 @@
   </div>
 
   <div class="field">
-    <label>Shipping Address</label>
+    <label>Address</label>
     <input type="text" placeholder="Street Address 1" [(ngModel)]="shipping.selectedAddress.street[0]">
   </div>
 
@@ -50,4 +51,24 @@
     <label>Phone Number</label>
     <input type="text" [(ngModel)]="shipping.selectedAddress.telephone">
   </div>
+
+  <div class="grouped fields">
+    <label>Shipping Methods</label>
+
+    <div class="field" *ngFor="#method of shipping.availableMethods">
+      <div class="ui radio checkbox">
+        <input type="radio"
+               tabindex="0"
+               class="hidden"
+               name="shipping_method"
+        >
+        <label>
+          {{method.carrier_title}}
+          - {{method.method_title}}
+          - {{method.price_incl_tax | currency:'NZD':true}}
+        </label>
+      </div>
+    </div>
+  </div>
+
 </form>
