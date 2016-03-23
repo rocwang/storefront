@@ -1,8 +1,8 @@
 <header class="ui small top fixed menu top-bar">
-  <a class="item" (click)="backToTop()">back</a>
+  <a class="item">back</a>
 
   <div class="header item">
-    <span class="header-inner">{{name}}</span>
+    <a class="header-inner" (click)="backToTop()">{{name}}</a>
   </div>
 
   <div class="ui search item">

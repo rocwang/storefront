@@ -1,3 +1,5 @@
+$header-color : rgba(0, 0, 0, .87);
+
 .app-body {
   padding-top    : 38.125px;
   padding-bottom : 72px;
@@ -17,4 +19,6 @@
 .header-inner {
   position : relative;
   left     : (204px - 56px) / 2;
+  color    : $header-color;
+  cursor   : pointer;
 }
