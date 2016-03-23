@@ -10,5 +10,10 @@
 }
 
 .ui.table {
-  flex : 1 1 auto;
+  flex       : 1 1 auto;
+  margin-top : 0;
+}
+
+.grand-total {
+  font-weight : bold;
 }
