@@ -1,22 +1,14 @@
-.cart-wrapper {
+:host {
   display   : flex;
   flex-flow : column nowrap;
-  height    : calc(100vh - 38.125px - 72px - 28px);
-}
-
-.ui.header {
-  flex : 0 0 auto;
+  height    : 100%;
 }
 
 .ui.items {
   overflow      : auto;
-  flex          : 1 1 auto;
+  flex-grow     : 1;
   margin-top    : 0;
   margin-bottom : 0;
-}
-
-.ui.table {
-  flex : 0 0 auto;
 }
 
 .grand-total {

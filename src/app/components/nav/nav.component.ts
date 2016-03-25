@@ -1,17 +1,17 @@
 import {Component, OnInit, ChangeDetectorRef} from 'angular2/core';
-import {ROUTER_DIRECTIVES} from 'angular2/router';
+import {ROUTER_DIRECTIVES, Router} from 'angular2/router';
 import {CartService} from '../../services/cart.service';
 
 @Component({
-  selector   : 'navigation',
+  selector   : 'nav',
   templateUrl: 'app/components/nav/nav.component.html',
-  styleUrls: ['app/components/nav/nav.component.css'],
+  styleUrls  : ['app/components/nav/nav.component.css'],
   directives : [ROUTER_DIRECTIVES],
 })
 export class NavComponent implements OnInit {
   private _timeoutHandle: number;
 
-  constructor(public cart: CartService, private _changeDetectorRef: ChangeDetectorRef) {
+  constructor(public cart: CartService, public router: Router, private _changeDetectorRef: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -32,7 +32,7 @@ export class NavComponent implements OnInit {
 
     $('#nav-checkout').popup('show');
 
-    this._timeoutHandle = setTimeout(function() {
+    this._timeoutHandle = setTimeout(function () {
       $('#nav-checkout').popup('hide');
     }, 3000);
   }

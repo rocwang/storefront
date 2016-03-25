@@ -1,0 +1,10 @@
+:host {
+  display   : flex;
+  flex-flow : column nowrap;
+  height    : 100%;
+}
+
+.ui.form {
+  flex-grow : 1;
+  overflow  : auto;
+}

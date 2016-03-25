@@ -1,6 +1,6 @@
-<form class="ui form">
+<h2 class="ui dividing header">Shipping</h2>
 
-  <h2 class="ui dividing header">Shipping</h2>
+<form class="ui form">
 
   <div class="field">
     <div class="two fields">
@@ -52,7 +52,7 @@
     <input type="text" [(ngModel)]="shipping.selectedAddress.telephone">
   </div>
 
-  <div class="grouped fields">
+  <div class="grouped fields shipping-methods">
     <label>Shipping Methods</label>
 
     <div class="field" *ngFor="#method of shipping.availableMethods">
@@ -68,6 +68,10 @@
           - {{method.price_incl_tax | currency:'NZD':true}}
         </label>
       </div>
+    </div>
+
+    <div class="ui inverted dimmer" [class.active]="!shipping.availableMethods.length">
+      <div class="ui loader"></div>
     </div>
   </div>
 

@@ -23,4 +23,4 @@
   </div>
 </div>
 
-<div class="ui text active loader" *ngIf="!catalog.products?.length">Loading</div>
+<div class="ui text large loader" [class.active]="!catalog.products?.length">Loading</div>

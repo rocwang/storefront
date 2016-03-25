@@ -10,9 +10,10 @@ import {MeComponent} from '../me/me.component';
 import {CatalogService} from '../../services/catalog.service';
 import {FeaturedComponent} from '../featured/featured.component';
 import {FeaturedService} from '../../services/featured.service';
-import {NavComponent} from '../nav/navigation.component';
+import {NavComponent} from '../nav/nav.component';
 import {ShippingService} from '../../services/shipping.service';
 import {PaymentService} from '../../services/payment.service';
+import {Router} from 'angular2/router';
 
 declare var Elevator: any;
 
@@ -43,7 +44,7 @@ export class AppComponent {
   name = 'Storefront';
 
 
-  constructor() {
+  constructor(public router: Router) {
   }
 
   backToTop() {

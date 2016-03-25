@@ -4,6 +4,7 @@ import {PaymentService} from '../../services/payment.service';
 @Component({
   selector   : 'payment',
   templateUrl: 'app/components/payment/payment.component.html',
+  styleUrls  : ['app/components/payment/payment.component.css'],
 })
 export class PaymentComponent implements OnInit {
 

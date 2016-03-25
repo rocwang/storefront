@@ -1,30 +1,32 @@
-<div class="cart-wrapper">
-  <h2 class="ui dividing header">Cart</h2>
+<h2 class="ui dividing header">Cart</h2>
 
-  <div class="ui divided items" *ngIf="cart?.totals?.items?.length">
+<div class="ui divided items" *ngIf="cart?.totals?.items?.length">
 
-    <div class="item" *ngFor="#item of cart.totals.items">
-      <div class="ui tiny image">
-        <img src="http://semantic-ui.com/images/wireframe/image.png">
-      </div>
-      <div class="content">
-        <div class="header">{{item.name}}</div>
-        <div class="meta">
-          <span>{{item.qty}}</span>
-          &times;
-          <span>{{item.price | currency:'NZD':true}}</span>
-        </div>
+  <div class="item" *ngFor="#item of cart.totals.items">
+    <div class="ui tiny image">
+      <img src="http://semantic-ui.com/images/wireframe/image.png">
+    </div>
+    <div class="content">
+      <div class="header">{{item.name}}</div>
+      <div class="meta">
+        <span>{{item.qty}}</span>
+        &times;
+        <span>{{item.price | currency:'NZD':true}}</span>
       </div>
     </div>
-
   </div>
 
-  <table class="ui very compact striped single line table" *ngIf="cart?.totals?.total_segments?.length">
-    <tbody>
-    <tr *ngFor="#total of cart.totals.total_segments" [class.grand-total]="total.title === 'Grand Total'">
-      <td class="eight wide">{{total.title}}</td>
-      <td class="eight wide">{{total.value | currency:'NZD':true}}</td>
-    </tr>
-    </tbody>
-  </table>
+</div>
+
+<table class="ui very compact striped single line table" *ngIf="cart?.totals?.total_segments?.length">
+  <tbody>
+  <tr *ngFor="#total of cart.totals.total_segments" [class.grand-total]="total.title === 'Grand Total'">
+    <td class="eight wide">{{total.title}}</td>
+    <td class="eight wide">{{total.value | currency:'NZD':true}}</td>
+  </tr>
+  </tbody>
+</table>
+
+<div class="ui inverted dimmer" [class.active]="!cart?.totals">
+  <div class="ui loader"></div>
 </div>

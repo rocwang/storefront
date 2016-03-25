@@ -1,11 +1,15 @@
-<header class="ui small top fixed menu top-bar">
-  <a class="item">back</a>
+<header class="ui small top fixed menu">
+  <a class="item" *ngIf="false">back</a>
 
-  <div class="header item">
-    <a class="header-inner" (click)="backToTop()">{{name}}</a>
+  <a class="header item" (click)="backToTop()" *ngIf="router.isRouteActive(router.generate(['/Catalog']))">
+    <span class="header-inner">{{name}}</span>
+  </a>
+
+  <div class="header item" *ngIf="!router.isRouteActive(router.generate(['/Catalog']))">
+    <span class="header-inner">{{name}}</span>
   </div>
 
-  <div class="ui search item">
+  <div class="ui search item" *ngIf="!router.isRouteActive(router.generate(['/Checkout']))">
     <div class="ui transparent icon input">
       <input class="prompt" type="text" placeholder="Search catalog...">
       <i class="search link icon"></i>
@@ -14,8 +18,8 @@
   </div>
 </header>
 
-<div class="app-body">
+<main [class.checkout]="router.isRouteActive(router.generate(['/Checkout']))">
   <router-outlet></router-outlet>
-</div>
+</main>
 
-<navigation></navigation>
+<nav class="ui bottom fixed labeled icon fluid four item menu"></nav>

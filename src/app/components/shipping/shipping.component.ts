@@ -5,6 +5,7 @@ import {CountryComponent} from '../country/country.component';
 @Component({
   selector   : 'shipping',
   templateUrl: 'app/components/shipping/shipping.component.html',
+  styleUrls  : ['app/components/shipping/shipping.component.css'],
   directives : [CountryComponent],
 })
 export class ShippingComponent implements OnInit {

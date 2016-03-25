@@ -1,3 +1,13 @@
-.checkout-container {
-  padding : 1rem;
+:host {
+  display : block;
+  height  : 100%;
+}
+
+.ui.grid {
+  height : 100%;
+  margin : 0;
+}
+
+.column {
+  height : 100%;
 }

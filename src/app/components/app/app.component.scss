@@ -1,24 +1,32 @@
 $header-color : rgba(0, 0, 0, .87);
 
-.app-body {
+:host {
+  display : block;
+}
+
+header.ui.menu {
+  z-index : 120;
+
+  .item.header {
+    flex-grow  : 1;
+    display    : block;
+    text-align : center;
+    color      : $header-color;
+
+    .header-inner {
+      position : relative;
+      left     : calc(50vw - 50%);
+    }
+  }
+}
+
+main {
   padding-top    : 38.125px;
   padding-bottom : 72px;
   overflow       : auto;
-}
+  min-height     : 100vh;
 
-.top-bar.ui.menu.fixed {
-  z-index : 120;
-}
-
-.ui.menu .item.header {
-  flex-grow  : 1;
-  display    : block;
-  text-align : center;
-}
-
-.header-inner {
-  position : relative;
-  left     : (204px - 56px) / 2;
-  color    : $header-color;
-  cursor   : pointer;
+  &.checkout {
+    height : 100vh;
+  }
 }
