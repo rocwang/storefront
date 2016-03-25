@@ -3,11 +3,11 @@ import {MagentoService} from './magento.service';
 import {CartService} from './cart.service';
 import {PaymentMethod} from '../typings/payment-method.d';
 import {Http, Headers, RequestOptions} from 'angular2/http';
+import {RadioButtonState} from 'angular2/common';
 
 @Injectable()
 export class PaymentService {
-  availableMethods: PaymentMethod[];
-  selectedMethod: PaymentMethod;
+  availableMethods: PaymentMethod[] = [];
 
   constructor(private _magento: MagentoService, private _cart: CartService, private _http: Http) {
   }
@@ -56,6 +56,13 @@ export class PaymentService {
 
           console.log('Available Payment Methods: ', data);
           this.availableMethods = data;
+
+          this.availableMethods.forEach((currentValue) => {
+            currentValue.state = new RadioButtonState(
+              false,
+              currentValue.code
+            );
+          });
 
         });
     });

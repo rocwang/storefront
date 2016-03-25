@@ -1,3 +1,5 @@
+import {RadioButtonState} from 'angular2/common';
+
 export interface ShippingMethod {
   carrier_code: string;
   carrier_title: string;
@@ -10,4 +12,5 @@ export interface ShippingMethod {
   available: boolean;
   extension_attributes: any;
   error_message: string;
+  state: RadioButtonState;
 }

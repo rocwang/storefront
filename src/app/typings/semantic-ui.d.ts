@@ -8,4 +8,6 @@ interface JQuery {
   transition(options?: any): JQuery;
   dropdown(options?: any): JQuery;
   dropdown(...options: any[]): JQuery;
+  checkbox(options?: any): JQuery;
+  checkbox(...options: any[]): JQuery;
 }

@@ -5,6 +5,7 @@ import {ShippingMethod} from '../typings/shipping-method.d';
 import {PaymentService} from './payment.service';
 import {Address} from '../typings/adress.d';
 import {Http, Headers, RequestOptions} from 'angular2/http';
+import {RadioButtonState} from 'angular2/common';
 
 @Injectable()
 export class ShippingService {
@@ -23,8 +24,7 @@ export class ShippingService {
     company: ''
   };
   availableAddress: Address[] = [];
-  
-  selectedMethod: ShippingMethod;
+
   availableMethods: ShippingMethod[] = [];
 
   constructor(private _magento: MagentoService,
@@ -59,6 +59,13 @@ export class ShippingService {
           console.log('Shipping methods: ', data);
           this.availableMethods = data;
 
+          this.availableMethods.forEach((currentValue) => {
+            currentValue.state = new RadioButtonState(
+              false,
+              currentValue.carrier_code + '_' + currentValue.method_code
+            );
+          });
+
         });
     });
 
@@ -77,6 +84,14 @@ export class ShippingService {
 
           console.log('Shipping methods by Cart: ', data);
           this.availableMethods = data;
+
+          this.availableMethods.forEach((currentValue) => {
+            currentValue.state = new RadioButtonState(
+              false,
+              currentValue.carrier_code + '_' + currentValue.method_code
+            );
+          });
+
         });
     });
 
@@ -91,8 +106,9 @@ export class ShippingService {
         addressInformation: {
           shippingAddress: this.selectedAddress,
           billingAddress: this.selectedAddress,
-          shippingMethodCode: this.selectedMethod.method_code,
-          shippingCarrierCode: this.selectedMethod.carrier_code
+          // Fixme: splie selectedMethod
+          // shippingMethodCode: this.selectedMethod,
+          // shippingCarrierCode: this.selectedMethod,
         }
       });
       let headers = new Headers({'Content-Type': 'application/json'});

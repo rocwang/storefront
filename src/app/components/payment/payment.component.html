@@ -3,14 +3,18 @@
 <form class="ui form" [class.loading]="!payment.availableMethods?.length">
   <div class="grouped fields">
 
-    <div class="field" *ngFor="#method of payment.availableMethods">
+    <div class="field" *ngFor="#method of payment.availableMethods; #i=index">
       <div class="ui radio checkbox">
         <input type="radio"
                tabindex="0"
                class="hidden"
                name="payment_method"
+               [id]="'payment_method_' + i"
+               [value]="method.state.value"
+               [(ngModel)]="method.state"
+               ngControl="payment_method"
         >
-        <label>{{method.title}}</label>
+        <label [attr.for]="'payment_method_' + i">{{method.title}}</label>
       </div>
     </div>
 

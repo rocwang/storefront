@@ -55,14 +55,18 @@
   <div class="grouped fields shipping-methods">
     <label>Shipping Methods</label>
 
-    <div class="field" *ngFor="#method of shipping.availableMethods">
+    <div class="field" *ngFor="#method of shipping.availableMethods; #i=index">
       <div class="ui radio checkbox">
         <input type="radio"
                tabindex="0"
                class="hidden"
                name="shipping_method"
+               [id]="'shipping_method_' + i"
+               [value]="method.state.value"
+               [(ngModel)]="method.state"
+               ngControl="shipping_method"
         >
-        <label>
+        <label [attr.for]="'shipping_method_' + i">
           {{method.carrier_title}}
           - {{method.method_title}}
           - {{method.price_incl_tax | currency:'NZD':true}}
