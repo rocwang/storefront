@@ -7,18 +7,16 @@
 
     <div class="content">
 
+      <a class="ui right floated" (click)="cart.del(item)">
+        <i class="remove circle icon"></i>
+      </a>
+
       <div class="header">{{item.name}}</div>
 
       <div class="meta">
         <span>{{item.qty}}</span>
         &times;
         <span>{{item.price | currency:'NZD':true}}</span>
-      </div>
-
-      <div class="extra">
-        <a class="ui right floated" (click)="cart.del(item)">
-          <i class="remove circle icon"></i>
-        </a>
       </div>
 
     </div>
