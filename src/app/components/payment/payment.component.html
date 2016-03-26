@@ -1,5 +1,3 @@
-<h2 class="ui dividing header">Payment</h2>
-
 <form class="ui form" [class.loading]="payment.isLoading">
   <div class="grouped fields">
 
@@ -13,6 +11,7 @@
                [value]="method.state.value"
                [(ngModel)]="method.state"
                ngControl="paymentMethod"
+               (change)="save()"
         >
         <label [attr.for]="'payment_method_' + i">{{method.title}}</label>
       </div>
@@ -20,10 +19,3 @@
 
   </div>
 </form>
-
-<button class="ui massive primary fluid button"
-        [class.loading]="payment.isPlacingOrder"
-        (click)="payment.saveAndPlaceOrder()"
->
-  Place Order
-</button>

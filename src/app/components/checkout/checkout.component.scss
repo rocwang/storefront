@@ -4,10 +4,16 @@
 }
 
 .ui.grid {
-  height : 100%;
-  margin : 0;
-}
+  height    : 100%;
+  margin    : 0;
+  flex-flow : column nowrap;
 
-.column {
-  height : 100%;
+  .form-container {
+    flex-grow : 1;
+
+    .column {
+      display   : flex;
+      flex-flow : column nowrap;
+    }
+  }
 }

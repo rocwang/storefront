@@ -1,7 +1,7 @@
 import {Injectable, EventEmitter} from 'angular2/core';
 import {MagentoService} from './magento.service';
 import {Product} from './../typings/product.d';
-import {Totals} from '../typings/totals.d';
+import {Totals, Item} from '../typings/totals.d';
 import {Http, Response, Headers, RequestOptions} from 'angular2/http';
 import {Observable} from 'rxjs/Observable';
 import {Subscriber} from 'rxjs/Subscriber';
@@ -12,6 +12,7 @@ export class CartService {
 
   refreshEvent: EventEmitter<any> = new EventEmitter();
   isLoading = false;
+  isConfirmed = false;
   totals: Totals;
 
   constructor(private _magento: MagentoService, private _http: Http) {
@@ -40,9 +41,9 @@ export class CartService {
         let options = new RequestOptions({headers: headers});
 
         return this._http.post('http://m2.rocwang.me/rest/V1/guest-carts/' + cartId + '/items', body, options)
-          .subscribe(response => {
+          .map(response => response.json())
+          .subscribe(cartItem => {
 
-            var cartItem = response.json();
             console.log('Add to cart: ', cartItem);
 
             observer.next(cartItem);
@@ -51,6 +52,31 @@ export class CartService {
       });
 
     });
+  }
+
+  del(item: Item) {
+
+    this.isLoading = true;
+
+    this.getCardId().subscribe(cartId => {
+
+      let headers = new Headers({'Content-Type': 'application/json'});
+      let options = new RequestOptions({headers: headers});
+
+      return this._http.delete('http://m2.rocwang.me/rest/V1/guest-carts/' + cartId + '/items/' + item.item_id, options)
+        .map(response => response.json())
+        .subscribe(isSucceeded => {
+
+          if (isSucceeded) {
+            this.refresh();
+          } else {
+            // Todo: handle error here
+            this.isLoading = false;
+          }
+
+        });
+    });
+
   }
 
   getCardId(): Observable<string> {
@@ -81,36 +107,31 @@ export class CartService {
   }
 
   refresh(triggerEvent = false) {
-    return new Observable<Totals>((observer: Subscriber<Totals>) => {
 
-      this.isLoading = true;
+    this.isLoading = true;
 
-      this.getCardId().subscribe(cartId => {
+    this.getCardId().subscribe(cartId => {
 
-        let headers = new Headers({'Content-Type': 'application/json'});
-        let options = new RequestOptions({headers: headers});
+      let headers = new Headers({'Content-Type': 'application/json'});
+      let options = new RequestOptions({headers: headers});
 
-        return this._http.get('http://m2.rocwang.me/rest/V1/guest-carts/' + cartId + '/totals', options)
-          .map(res => <Totals>res.json())
-          .catch(this._handleError)
-          .subscribe(totals => {
+      return this._http.get('http://m2.rocwang.me/rest/V1/guest-carts/' + cartId + '/totals', options)
+        .map(res => <Totals>res.json())
+        .catch(this._handleError)
+        .subscribe(totals => {
 
-            observer.next(totals);
+          this.totals = totals;
+          console.log('Totals:', this.totals);
 
-          });
-      });
-    }).subscribe(totals => {
+          if (triggerEvent) {
+            this.refreshEvent.emit(this.totals);
+          }
 
-      this.totals = totals;
-      console.log('Totals:', this.totals);
+          this.isLoading = false;
 
-      if (triggerEvent) {
-        this.refreshEvent.emit(this.totals);
-      }
-
-      this.isLoading = false;
-
+        });
     });
+
   }
 
   getCartData() {

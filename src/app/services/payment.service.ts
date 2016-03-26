@@ -10,6 +10,7 @@ export class PaymentService {
   availableMethods: PaymentMethod[] = [];
   isLoading = false;
   isPlacingOrder = false;
+  isSaved = false;
   email = '';
 
   constructor(private _magento: MagentoService, private _cart: CartService, private _http: Http) {
@@ -17,6 +18,7 @@ export class PaymentService {
 
   saveAndPlaceOrder() {
 
+    this._cart.isConfirmed = true;
     this.isPlacingOrder = true;
 
     this._cart.getCardId().subscribe(cartId => {
@@ -46,11 +48,55 @@ export class PaymentService {
       ).map(response => response.json())
         .subscribe(data => {
 
-          console.log('Order Id', data);
+          console.log('Order Id:', data);
           this._cart.reset();
           this.isPlacingOrder = false;
 
         });
+
+      // setTimeout(() => {
+      //   this.isPlacingOrder = false;
+      // }, 3000);
+    });
+
+  }
+
+  save() {
+
+    this.isLoading = true;
+
+    this._cart.getCardId().subscribe(cartId => {
+
+      let methodCode = '';
+      this.availableMethods.forEach((currentValue: PaymentMethod) => {
+        if (currentValue.state.checked) {
+          methodCode = currentValue.code;
+        }
+      });
+
+      let body = JSON.stringify({
+        email        : this.email,
+        paymentMethod: {
+          poNumber      : null,
+          method        : methodCode,
+          additionalData: null,
+        }
+      });
+      let headers = new Headers({'Content-Type': 'application/json'});
+      let options = new RequestOptions({headers: headers});
+
+      this._http.post(
+        'http://m2.rocwang.me/rest/V1/guest-carts/' + cartId + '/set-payment-information',
+        body,
+        options
+      ).map(response => response.json())
+        .subscribe(isSaved => {
+
+          this.isLoading = false;
+          this.isSaved = isSaved;
+
+        });
+
     });
 
   }
@@ -69,13 +115,19 @@ export class PaymentService {
         .subscribe((data: PaymentMethod[]) => {
 
           console.log('Available Payment Methods: ', data);
-          this.availableMethods = data;
 
-          this.availableMethods.forEach((currentValue: PaymentMethod) => {
+          data.forEach((currentValue: PaymentMethod) => {
+            // Exclude the "free" payment method
+            if (currentValue.code === 'free') {
+              return;
+            }
+
             currentValue.state = new RadioButtonState(
               false,
               currentValue.code
             );
+
+            this.availableMethods.push(currentValue);
           });
 
           this.isLoading = false;

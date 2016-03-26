@@ -24,6 +24,7 @@ export class ShippingService {
   availableAddresses: Address[] = [];
   availableMethods: ShippingMethod[] = [];
   isLoadingMethods = false;
+  isSaved = false;
 
   constructor(private _magento: MagentoService,
               private _cart: CartService,
@@ -131,10 +132,11 @@ export class ShippingService {
       ).map(response => response.json())
         .subscribe((data: any) => {
 
-          console.log('Available Payment Methods: ', data);
+          console.log('Payment and Totals: ', data);
           // this._payment.availableMethods = data.payment_methods;
           this._cart.totals = data.totals;
           this._cart.isLoading = false;
+          this.isSaved = true;
 
         });
     });

@@ -1,5 +1,45 @@
-<div class="ui grid stackable container">
-  <div class="six wide column"><cart></cart></div>
-  <div class="five wide column"><shipping></shipping></div>
-  <div class="five wide column"><payment></payment></div>
+<div class="ui divided stackable grid container">
+
+  <div class="row steps-container">
+    <div class="column">
+
+      <div class="ui three small steps">
+        <div class="step" [class.completed]="shipping.isSaved">
+          <i class="truck icon"></i>
+          <div class="content">
+            <div class="title">Shipping</div>
+            <div class="description">Choose your shipping options</div>
+          </div>
+        </div>
+        <div class="step" [class.completed]="payment.isSaved">
+          <i class="payment icon"></i>
+          <div class="content">
+            <div class="title">Payment</div>
+            <div class="description">Enter billing information</div>
+          </div>
+        </div>
+        <div class="step" [class.completed]="cart.isConfirmed ">
+          <i class="info icon"></i>
+          <div class="content">
+            <div class="title">Confirm Order</div>
+            <div class="description">Verify order details</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row three column form-container">
+    <div class="column">
+      <shipping></shipping>
+    </div>
+    <div class="column">
+      <payment></payment>
+    </div>
+    <div class="column">
+      <cart></cart>
+    </div>
+  </div>
+
 </div>

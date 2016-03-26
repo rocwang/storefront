@@ -1,4 +1,4 @@
-import {Component, ChangeDetectorRef} from 'angular2/core';
+import {Component} from 'angular2/core';
 import {HTTP_PROVIDERS} from 'angular2/http';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
 import {CatalogComponent} from '../catalog/catalog.component';
@@ -26,7 +26,6 @@ declare var Elevator: any;
     ROUTER_PROVIDERS,
     MagentoService,
     CartService,
-    ChangeDetectorRef,
     CatalogService,
     FeaturedService,
     ShippingService,

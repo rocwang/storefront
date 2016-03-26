@@ -1,18 +1,26 @@
-<h2 class="ui dividing header">Cart</h2>
-
 <div class="ui divided items" *ngIf="cart?.totals?.items?.length">
 
   <div class="item" *ngFor="#item of cart.totals.items">
     <div class="ui tiny image">
       <img src="http://semantic-ui.com/images/wireframe/image.png">
     </div>
+
     <div class="content">
+
       <div class="header">{{item.name}}</div>
+
       <div class="meta">
         <span>{{item.qty}}</span>
         &times;
         <span>{{item.price | currency:'NZD':true}}</span>
       </div>
+
+      <div class="extra">
+        <a class="ui right floated" (click)="cart.del(item)">
+          <i class="remove circle icon"></i>
+        </a>
+      </div>
+
     </div>
   </div>
 
@@ -26,6 +34,13 @@
   </tr>
   </tbody>
 </table>
+
+<button class="ui massive primary fluid button"
+        [class.loading]="payment.isPlacingOrder"
+        (click)="payment.saveAndPlaceOrder()"
+>
+  Place Order
+</button>
 
 <div class="ui inverted dimmer" [class.active]="cart.isLoading">
   <div class="ui loader"></div>

@@ -1,7 +1,8 @@
 :host {
   display   : flex;
   flex-flow : column nowrap;
-  height    : 100%;
+  flex-grow : 1;
+  justify-content: flex-end;
 }
 
 .ui.items {

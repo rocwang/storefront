@@ -17,4 +17,8 @@ export class PaymentComponent implements OnInit {
       this.payment.loadMethods();
     }
   }
+
+  save() {
+    setTimeout(() => this.payment.save(), 100);
+  }
 }

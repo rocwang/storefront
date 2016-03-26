@@ -1,14 +1,15 @@
-import {Component, OnInit, ChangeDetectorRef} from 'angular2/core';
+import {Component, OnInit} from 'angular2/core';
 import {CartService} from '../../services/cart.service';
+import {PaymentService} from '../../services/payment.service';
 
 @Component({
   selector   : 'cart',
   templateUrl: 'app/components/cart/cart.component.html',
-  styleUrls: ['app/components/cart/cart.component.css'],
+  styleUrls  : ['app/components/cart/cart.component.css'],
 })
 export class CartComponent implements OnInit {
 
-  constructor(public cart: CartService, private _changeDetectorRef: ChangeDetectorRef) {
+  constructor(public cart: CartService, public payment: PaymentService) {
   }
 
   ngOnInit() {
