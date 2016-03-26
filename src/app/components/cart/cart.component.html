@@ -27,6 +27,6 @@
   </tbody>
 </table>
 
-<div class="ui inverted dimmer" [class.active]="!cart?.totals">
+<div class="ui inverted dimmer" [class.active]="cart.isLoading">
   <div class="ui loader"></div>
 </div>

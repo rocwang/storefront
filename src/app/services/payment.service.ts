@@ -8,19 +8,31 @@ import {RadioButtonState} from 'angular2/common';
 @Injectable()
 export class PaymentService {
   availableMethods: PaymentMethod[] = [];
+  isLoading = false;
+  isPlacingOrder = false;
+  email = '';
 
   constructor(private _magento: MagentoService, private _cart: CartService, private _http: Http) {
   }
 
-  savePaymentInforAndPlaceOrderPost(email: string, paymentMethodCode: string) {
+  saveAndPlaceOrder() {
+
+    this.isPlacingOrder = true;
 
     this._cart.getCardId().subscribe(cartId => {
 
+      let methodCode = '';
+      this.availableMethods.forEach((currentValue: PaymentMethod) => {
+        if (currentValue.state.checked) {
+          methodCode = currentValue.code;
+        }
+      });
+
       let body = JSON.stringify({
-        email: email,
+        email        : this.email,
         paymentMethod: {
-          poNumber: null,
-          method: paymentMethodCode,
+          poNumber      : null,
+          method        : methodCode,
           additionalData: null,
         }
       });
@@ -34,16 +46,18 @@ export class PaymentService {
       ).map(response => response.json())
         .subscribe(data => {
 
-          console.log('Place order: ', data);
+          console.log('Order Id', data);
           this._cart.reset();
-          alert('Order placed!');
+          this.isPlacingOrder = false;
 
         });
     });
 
   }
 
-  getMethods() {
+  loadMethods() {
+
+    this.isLoading = true;
 
     this._cart.getCardId().subscribe(cartId => {
 
@@ -57,12 +71,14 @@ export class PaymentService {
           console.log('Available Payment Methods: ', data);
           this.availableMethods = data;
 
-          this.availableMethods.forEach((currentValue) => {
+          this.availableMethods.forEach((currentValue: PaymentMethod) => {
             currentValue.state = new RadioButtonState(
               false,
               currentValue.code
             );
           });
+
+          this.isLoading = false;
 
         });
     });

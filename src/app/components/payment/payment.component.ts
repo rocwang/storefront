@@ -1,5 +1,6 @@
 import {Component, OnInit} from 'angular2/core';
 import {PaymentService} from '../../services/payment.service';
+import {ShippingService} from '../../services/shipping.service';
 
 @Component({
   selector   : 'payment',
@@ -8,10 +9,12 @@ import {PaymentService} from '../../services/payment.service';
 })
 export class PaymentComponent implements OnInit {
 
-  constructor(public payment: PaymentService) {
+  constructor(public payment: PaymentService, public shipping: ShippingService) {
   }
 
   ngOnInit() {
-    this.payment.getMethods();
+    if (!this.payment.availableMethods.length) {
+      this.payment.loadMethods();
+    }
   }
 }

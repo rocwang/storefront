@@ -11,7 +11,7 @@ export class CartService {
   private _STORAGE_KEY = 'cart-id';
 
   refreshEvent: EventEmitter<any> = new EventEmitter();
-  isRefreshing = false;
+  isLoading = false;
   totals: Totals;
 
   constructor(private _magento: MagentoService, private _http: Http) {
@@ -66,23 +66,24 @@ export class CartService {
       let options = new RequestOptions({headers: headers});
 
       return this._http.post('http://m2.rocwang.me/rest/V1/guest-carts', '', options)
-        .map(res => {
+        .map(response => {
 
-          var cartId = res.text().replace(/"/g, '');
+          var cartId = response.json();
           console.log('Cart Id:', cartId);
           localStorage.setItem(this._STORAGE_KEY, cartId);
 
           return cartId;
 
-        }).catch(this._handleError);
+        })
+        .catch(this._handleError);
 
     }
   }
 
   refresh(triggerEvent = false) {
-    this.isRefreshing = true;
-
     return new Observable<Totals>((observer: Subscriber<Totals>) => {
+
+      this.isLoading = true;
 
       this.getCardId().subscribe(cartId => {
 
@@ -107,7 +108,7 @@ export class CartService {
         this.refreshEvent.emit(this.totals);
       }
 
-      this.isRefreshing = false;
+      this.isLoading = false;
 
     });
   }

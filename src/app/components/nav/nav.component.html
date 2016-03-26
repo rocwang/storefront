@@ -16,7 +16,7 @@
 >
   <i id="icon-cart"
      class="icon"
-     [ngClass]="{shop: !cart.isRefreshing, loading: cart.isRefreshing, spinner: cart.isRefreshing}"
+     [ngClass]="{shop: !cart.isLoading, loading: cart.isLoading, spinner: cart.isLoading}"
   ></i>
   Checkout
   <div class="ui red floating circular label" *ngIf="cart?.totals?.items_qty > 0">{{cart.totals.items_qty}}</div>

@@ -8,7 +8,5 @@ export interface Address {
   city: string;
   firstname: string;
   lastname: string;
-  methodCode: string;
-  carrayCode: string;
   company: string;
 }

@@ -10,22 +10,20 @@ import {RadioButtonState} from 'angular2/common';
 @Injectable()
 export class ShippingService {
   selectedAddress: Address = {
-    region: '',
-    regionId: 0,
+    region   : '',
+    regionId : 0,
     countryId: 'us',
-    postcode: '',
-    street: ['', ''],
+    postcode : '',
+    street   : ['', ''],
     telephone: '',
-    city: '',
+    city     : '',
     firstname: '',
-    lastname: '',
-    methodCode: '',
-    carrayCode: '',
-    company: ''
+    lastname : '',
+    company  : ''
   };
-  availableAddress: Address[] = [];
-
+  availableAddresses: Address[] = [];
   availableMethods: ShippingMethod[] = [];
+  isLoadingMethods = false;
 
   constructor(private _magento: MagentoService,
               private _cart: CartService,
@@ -33,16 +31,18 @@ export class ShippingService {
               private _http: Http) {
   }
 
-  getShippingMethodsByAddr() {
+  loadMethodsByAddress() {
+
+    this.isLoadingMethods = true;
 
     this._cart.getCardId().subscribe(cartId => {
 
       let body = JSON.stringify({
         address: {
-          region: this.selectedAddress.region,
+          region   : this.selectedAddress.region,
           // regionId : 0,
           countryId: this.selectedAddress.countryId,
-          postcode: this.selectedAddress.postcode,
+          postcode : this.selectedAddress.postcode,
         }
       });
 
@@ -57,21 +57,23 @@ export class ShippingService {
         .subscribe((data) => {
 
           console.log('Shipping methods: ', data);
-          this.availableMethods = data;
 
-          this.availableMethods.forEach((currentValue) => {
+          data.forEach((currentValue: ShippingMethod) => {
             currentValue.state = new RadioButtonState(
               false,
               currentValue.carrier_code + '_' + currentValue.method_code
             );
           });
 
+          this.availableMethods = data;
+          this.isLoadingMethods = false;
+
         });
     });
 
   }
 
-  getShippingMethodsByCart() {
+  loadMethodsByCart() {
 
     this._cart.getCardId().subscribe(cartId => {
 
@@ -85,7 +87,7 @@ export class ShippingService {
           console.log('Shipping methods by Cart: ', data);
           this.availableMethods = data;
 
-          this.availableMethods.forEach((currentValue) => {
+          this.availableMethods.forEach((currentValue: ShippingMethod) => {
             currentValue.state = new RadioButtonState(
               false,
               currentValue.carrier_code + '_' + currentValue.method_code
@@ -97,23 +99,31 @@ export class ShippingService {
 
   }
 
-
-  saveShippingInfoAndGetPaymentMethods() {
+  save() {
 
     this._cart.getCardId().subscribe(cartId => {
 
+      let carrierCode = '';
+      let methodCode = '';
+      this.availableMethods.forEach((currentValue: ShippingMethod) => {
+        if (currentValue.state.checked) {
+          carrierCode = currentValue.carrier_code;
+          methodCode = currentValue.method_code;
+        }
+      });
+
       let body = JSON.stringify({
         addressInformation: {
-          shippingAddress: this.selectedAddress,
-          billingAddress: this.selectedAddress,
-          // Fixme: splie selectedMethod
-          // shippingMethodCode: this.selectedMethod,
-          // shippingCarrierCode: this.selectedMethod,
+          shippingAddress    : this.selectedAddress,
+          billingAddress     : this.selectedAddress,
+          shippingCarrierCode: carrierCode,
+          shippingMethodCode : methodCode,
         }
       });
       let headers = new Headers({'Content-Type': 'application/json'});
       let options = new RequestOptions({headers: headers});
 
+      this._cart.isLoading = true;
       this._http.post(
         'http://m2.rocwang.me/rest/V1/guest-carts/' + cartId + '/shipping-information',
         body,
@@ -122,8 +132,9 @@ export class ShippingService {
         .subscribe((data: any) => {
 
           console.log('Available Payment Methods: ', data);
-          this._payment.availableMethods = data.payment_methods;
+          // this._payment.availableMethods = data.payment_methods;
           this._cart.totals = data.totals;
+          this._cart.isLoading = false;
 
         });
     });
