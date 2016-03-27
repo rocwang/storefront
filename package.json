@@ -42,7 +42,7 @@
         "gulp-util"                   : "latest",
         "merge-stream"                : "latest",
         "tslint"                      : "3.x",
-        "browser-sync"                : "latest",
+        "browser-sync"                : "2.x",
         "connect-history-api-fallback": "latest",
         "typescript"                  : "1.x",
         "typings"                     : "^0.7.9",
