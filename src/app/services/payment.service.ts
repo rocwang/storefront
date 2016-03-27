@@ -4,6 +4,7 @@ import {CartService} from './cart.service';
 import {PaymentMethod} from '../typings/payment-method.d';
 import {Http, Headers, RequestOptions} from 'angular2/http';
 import {RadioButtonState} from 'angular2/common';
+import {EventEmitter} from 'angular2/core';
 
 @Injectable()
 export class PaymentService {
@@ -11,7 +12,10 @@ export class PaymentService {
   isLoading = false;
   isPlacingOrder = false;
   isSaved = false;
+  isOrderPlaced = false;
   email = '';
+  orderPlacedEvent: EventEmitter<any> = new EventEmitter();
+  orderId = 0;
 
   constructor(private _magento: MagentoService, private _cart: CartService, private _http: Http) {
   }
@@ -51,11 +55,17 @@ export class PaymentService {
           console.log('Order Id:', data);
           this._cart.reset();
           this.isPlacingOrder = false;
+          this.isOrderPlaced = true;
+          this.orderId = data;
+          this.orderPlacedEvent.emit(data);
 
         });
 
       // setTimeout(() => {
       //   this.isPlacingOrder = false;
+      //   this.isOrderPlaced = true;
+      //   this.orderId = 111;
+      //   this.orderPlacedEvent.emit(this.orderId);
       // }, 3000);
     });
 

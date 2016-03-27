@@ -19,3 +19,25 @@
 
   </div>
 </form>
+
+<div class="ui basic modal" id="order-placed">
+  <i class="close icon"></i>
+
+  <div class="header">That's it! Your Order Is Placed</div>
+
+  <div class="image content">
+    <div class="image">
+      <i class="checkmark icon"></i>
+    </div>
+
+    <div class="description">
+      <p>
+        Your order ID is <strong>{{payment.orderId}}</strong>.
+        You can find it in
+        <a [attr.href]="'http://m2.rocwang.me/admin/sales/order/view/order_id/'+payment.orderId+'/'" target="_blank">
+          the Magento admin
+        </a>
+      </p>
+    </div>
+  </div>
+</div>

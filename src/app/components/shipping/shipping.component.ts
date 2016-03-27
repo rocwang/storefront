@@ -2,7 +2,6 @@ import {Component, OnInit} from 'angular2/core';
 import {ShippingService} from '../../services/shipping.service';
 import {CountryComponent} from '../country/country.component';
 import {PaymentService} from '../../services/payment.service';
-import {RadioButtonState} from 'angular2/common';
 
 @Component({
   selector   : 'shipping',
@@ -22,6 +21,6 @@ export class ShippingComponent implements OnInit {
   }
 
   save() {
-    setTimeout(() => this.shipping.save(), 100);
+    setTimeout(() => this.shipping.save(), 300);
   }
 }

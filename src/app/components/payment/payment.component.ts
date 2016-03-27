@@ -16,9 +16,13 @@ export class PaymentComponent implements OnInit {
     if (!this.payment.availableMethods.length) {
       this.payment.loadMethods();
     }
+
+    this.payment.orderPlacedEvent.subscribe(() => {
+      $('#order-placed').modal('show');
+    });
   }
 
   save() {
-    setTimeout(() => this.payment.save(), 100);
+    setTimeout(() => this.payment.save(), 300);
   }
 }
