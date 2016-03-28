@@ -1,3 +1,3 @@
 FROM nginx:alpine
 COPY nginx /etc/nginx
-COPY test /etc/nginx/html
+COPY test /usr/share/nginx/html
