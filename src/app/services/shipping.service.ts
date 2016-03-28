@@ -47,7 +47,10 @@ export class ShippingService {
         }
       });
 
-      let headers = new Headers({'Content-Type': 'application/json'});
+      let headers = new Headers({
+        'Content-Type': 'application/json',
+        'Accept'      : 'application/json',
+      });
       let options = new RequestOptions({headers: headers});
 
       this._http.post(
@@ -78,7 +81,10 @@ export class ShippingService {
 
     this._cart.getCardId().subscribe(cartId => {
 
-      let headers = new Headers({'Content-Type': 'application/json'});
+      let headers = new Headers({
+        'Content-Type': 'application/json',
+        'Accept'      : 'application/json',
+      });
       let options = new RequestOptions({headers: headers});
 
       return this._http.get('http://m2.rocwang.me/rest/V1/guest-carts/' + cartId + '/shipping-methods', options)
@@ -121,7 +127,10 @@ export class ShippingService {
           shippingMethodCode : methodCode,
         }
       });
-      let headers = new Headers({'Content-Type': 'application/json'});
+      let headers = new Headers({
+        'Content-Type': 'application/json',
+        'Accept'      : 'application/json',
+      });
       let options = new RequestOptions({headers: headers});
 
       this._cart.isLoading = true;

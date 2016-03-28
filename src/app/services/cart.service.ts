@@ -37,7 +37,10 @@ export class CartService {
           }
         });
 
-        let headers = new Headers({'Content-Type': 'application/json'});
+        let headers = new Headers({
+          'Content-Type': 'application/json',
+          'Accept'      : 'application/json',
+        });
         let options = new RequestOptions({headers: headers});
 
         return this._http.post('http://m2.rocwang.me/rest/V1/guest-carts/' + cartId + '/items', body, options)
@@ -60,7 +63,10 @@ export class CartService {
 
     this.getCardId().subscribe(cartId => {
 
-      let headers = new Headers({'Content-Type': 'application/json'});
+      let headers = new Headers({
+        'Content-Type': 'application/json',
+        'Accept'      : 'application/json',
+      });
       let options = new RequestOptions({headers: headers});
 
       return this._http.delete('http://m2.rocwang.me/rest/V1/guest-carts/' + cartId + '/items/' + item.item_id, options)
@@ -88,7 +94,10 @@ export class CartService {
 
     } else {
 
-      let headers = new Headers({'Content-Type': 'application/json'});
+      let headers = new Headers({
+        'Content-Type': 'application/json',
+        'Accept'      : 'application/json',
+      });
       let options = new RequestOptions({headers: headers});
 
       return this._http.post('http://m2.rocwang.me/rest/V1/guest-carts', '', options)
@@ -112,7 +121,10 @@ export class CartService {
 
     this.getCardId().subscribe(cartId => {
 
-      let headers = new Headers({'Content-Type': 'application/json'});
+      let headers = new Headers({
+        'Content-Type': 'application/json',
+        'Accept'      : 'application/json',
+      });
       let options = new RequestOptions({headers: headers});
 
       return this._http.get('http://m2.rocwang.me/rest/V1/guest-carts/' + cartId + '/totals', options)
@@ -139,7 +151,10 @@ export class CartService {
 
       this.getCardId().subscribe(cartId => {
 
-        let headers = new Headers({'Content-Type': 'application/json'});
+        let headers = new Headers({
+          'Content-Type': 'application/json',
+          'Accept'      : 'application/json',
+        });
         let options = new RequestOptions({headers: headers});
 
         return this._http.get('http://m2.rocwang.me/rest/V1/guest-carts/' + cartId, options)

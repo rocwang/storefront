@@ -16,7 +16,10 @@ export class CatalogService {
       return;
     }
 
-    let headers = new Headers({'Content-Type': 'application/json'});
+    let headers = new Headers({
+      'Content-Type': 'application/json',
+      'Accept'      : 'application/json',
+    });
 
     var search = new URLSearchParams();
     search.set('searchCriteria[filter_groups][0][filters][0][field]', 'visibility');
