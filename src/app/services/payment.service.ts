@@ -135,6 +135,7 @@ export class PaymentService {
 
           console.log('Available Payment Methods: ', data);
 
+          this.availableMethods = [];
           data.forEach((currentValue: PaymentMethod) => {
             // Exclude the "free" payment method
             if (currentValue.code === 'free') {
