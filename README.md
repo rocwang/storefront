@@ -2,7 +2,7 @@
 
 Magento 2 comes with rich [REST API](http://devdocs.magento.com/guides/v2.0/get-started/bk-get-started-api.html)
 support, which contains almost every features you can find in the native front end. So in theory, we can build
-a standalone web app as a alternative storefront, which consumes the API provided by a headless Magento 2 instance.
+a standalone web app as an alternative storefront, which consumes the API provided by a headless Magento 2 instance.
 
 As a proof of concept, I've been playing with Magento 2 and Angular 2 recently and built a
 [Single Page App](https://en.wikipedia.org/wiki/Single-page_application), in which you can browse the catalog,
