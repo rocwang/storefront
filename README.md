@@ -90,3 +90,7 @@ The integration among payment gateways, Magento and our app is definitely possib
 | Typescript -> JS | ...                     | Semantic UI           |
 |                  |                         | System JS             |
 |                  |                         | ...                   |
+
+## Start the container
+
+    docker run --name storefront -e VIRTUAL_HOST=storefront.rocwang.me -d rocwang/storefront
