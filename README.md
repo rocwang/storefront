@@ -83,13 +83,13 @@ The integration among payment gateways, Magento and our app is definitely possib
 
 ## Some facts about the app
 
-| Languages        | Build time dependencies | Run time dependencies |
-| ---------------- | ----------------------- | --------------------- |
-| HTML             | Gulp and its plugins    | Angular 2             |
-| SCSS -> CSS      | Browsersync             | jQuery                |
-| Typescript -> JS | ...                     | Semantic UI           |
-|                  |                         | System JS             |
-|                  |                         | ...                   |
+| Languages               | Build time dependencies | Run time dependencies |
+| ----------------------- | ----------------------- | --------------------- |
+| Angular 2 flavored HTML | Gulp and its plugins    | Angular 2             |
+| SCSS -> CSS             | Browsersync             | jQuery                |
+| Typescript -> JS        | ...                     | Semantic UI           |
+|                         |                         | System JS             |
+|                         |                         | ...                   |
 
 ## Start the container
 
