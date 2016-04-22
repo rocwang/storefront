@@ -59,6 +59,7 @@ var srcFiles = {
   js      : [
     "src/js/elevator.js",
     "node_modules/jquery/dist/jquery.js",
+    "node_modules/card/lib/js/card.js",
 
     "node_modules/es6-shim/es6-shim.min.js",
     "node_modules/systemjs/dist/system-polyfills.js",

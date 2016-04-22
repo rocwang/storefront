@@ -2,6 +2,7 @@ import {Injectable} from 'angular2/core';
 import {MagentoService} from './magento.service';
 import {CartService} from './cart.service';
 import {PaymentMethod} from '../typings/payment-method.d';
+import {AddtionalData} from '../typings/additional-data.d';
 import {Http, Headers, RequestOptions} from 'angular2/http';
 import {RadioButtonState} from 'angular2/common';
 import {EventEmitter} from 'angular2/core';
@@ -9,37 +10,66 @@ import {EventEmitter} from 'angular2/core';
 @Injectable()
 export class PaymentService {
   availableMethods: PaymentMethod[] = [];
+
   isLoading = false;
   isPlacingOrder = false;
   isSaved = false;
   isOrderPlaced = false;
-  email = '';
+
   orderPlacedEvent: EventEmitter<any> = new EventEmitter();
+
+  email = '';
   orderId = 0;
+  cc_cid = '';
+
+  additionalData: AddtionalData = {
+    cc_exp_month        : '',
+    cc_exp_year         : '',
+    cc_last4            : '',
+    cc_token            : null,
+    cc_type             : 'VI',
+    device_data         : '',
+    payment_method_nonce: 'fake-valid-nonce',
+    store_in_vault      : true
+  };
 
   constructor(private _magento: MagentoService, private _cart: CartService, private _http: Http) {
   }
 
+  get selectedMethod() {
+    let methodCode = '';
+
+    this.availableMethods.forEach((currentValue: PaymentMethod) => {
+      if (currentValue.state.checked) {
+        methodCode = currentValue.code;
+      }
+    });
+
+    return methodCode;
+  }
+
+  set ccLast4(ccNumber: string) {
+    this.additionalData.cc_last4 = ccNumber.slice(-4);
+  }
+
+  get cclast4() {
+    return this.additionalData.cc_last4;
+  }
+
   saveAndPlaceOrder() {
+    console.log(this.additionalData);
 
     this._cart.isConfirmed = true;
     this.isPlacingOrder = true;
 
     this._cart.getCardId().subscribe(cartId => {
 
-      let methodCode = '';
-      this.availableMethods.forEach((currentValue: PaymentMethod) => {
-        if (currentValue.state.checked) {
-          methodCode = currentValue.code;
-        }
-      });
-
       let body = JSON.stringify({
         email        : this.email,
         paymentMethod: {
           poNumber      : null,
-          method        : methodCode,
-          additionalData: null,
+          method        : this.selectedMethod,
+          additionalData: this.additionalData,
         }
       });
       let headers = new Headers({
@@ -76,23 +106,14 @@ export class PaymentService {
 
   save() {
 
-    this.isLoading = true;
-
     this._cart.getCardId().subscribe(cartId => {
-
-      let methodCode = '';
-      this.availableMethods.forEach((currentValue: PaymentMethod) => {
-        if (currentValue.state.checked) {
-          methodCode = currentValue.code;
-        }
-      });
 
       let body = JSON.stringify({
         email        : this.email,
         paymentMethod: {
           poNumber      : null,
-          method        : methodCode,
-          additionalData: null,
+          method        : this.selectedMethod,
+          additionalData: this.additionalData,
         }
       });
       let headers = new Headers({
@@ -108,7 +129,6 @@ export class PaymentService {
       ).map(response => response.json())
         .subscribe(isSaved => {
 
-          this.isLoading = false;
           this.isSaved = isSaved;
 
         });

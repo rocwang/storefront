@@ -1,6 +1,36 @@
-<form class="ui form" [class.loading]="payment.isLoading">
-  <div class="grouped fields">
+<form class="ui form" [class.loading]="payment.isLoading" id="cc_form">
 
+  <div class="credit-card" [class.hidden]="payment.selectedMethod !== 'braintree'">
+    <div id="cc_card" class="cc-card"></div>
+
+    <div class="credit-card">
+      <div class="field" [class.disabled]="payment.isPlacingOrder">
+        <label for="cc_number">Credit Card Number</label>
+        <input type="text" [(ngModel)]="payment.ccLast4" id="cc_number" placeholder="•••• •••• •••• ••••">
+      </div>
+
+      <div class="field" [class.disabled]="payment.isPlacingOrder">
+        <div class="three fields">
+          <div class="field">
+            <label for="cc_exp_month">Expiration Month</label>
+            <input type="text" [(ngModel)]="payment.additionalData.cc_exp_month" id="cc_exp_month" placeholder="MM">
+          </div>
+          <div class="field">
+            <label for="cc_exp_year">Expiration Year</label>
+            <input type="text" [(ngModel)]="payment.additionalData.cc_exp_year" id="cc_exp_year" placeholder="YYYY">
+          </div>
+          <div class="field">
+            <label for="cc_cid">CVV</label>
+            <input type="text" [(ngModel)]="payment.cc_cid" id="cc_cid" placeholder="•••">
+          </div>
+        </div>
+      </div>
+
+      <input type="hidden" id="cc_name"/>
+    </div>
+  </div>
+
+  <div class="grouped fields">
     <div class="field" *ngFor="#method of payment.availableMethods; #i=index" [class.disabled]="payment.isPlacingOrder">
       <div class="ui radio checkbox">
         <input type="radio"
@@ -16,8 +46,8 @@
         <label [attr.for]="'payment_method_' + i">{{method.title}}</label>
       </div>
     </div>
-
   </div>
+
 </form>
 
 <div class="ui basic modal" id="order-placed">
