@@ -1,4 +1,4 @@
-import {Component, OnInit} from 'angular2/core';
+import {Component, OnInit} from '@angular/core';
 import {Product} from '../../typings/product';
 import {CartService} from '../../services/cart.service';
 import {CatalogService} from '../../services/catalog.service';

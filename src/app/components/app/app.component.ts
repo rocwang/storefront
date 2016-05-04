@@ -1,6 +1,6 @@
-import {Component} from 'angular2/core';
-import {HTTP_PROVIDERS} from 'angular2/http';
-import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
+import {Component} from '@angular/core';
+import {HTTP_PROVIDERS} from '@angular/http';
+import {Router, RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-deprecated';
 import {CatalogComponent} from '../catalog/catalog.component';
 import {MagentoService} from '../../services/magento.service';
 import {CartComponent} from '../cart/cart.component';
@@ -13,7 +13,6 @@ import {FeaturedService} from '../../services/featured.service';
 import {NavComponent} from '../nav/nav.component';
 import {ShippingService} from '../../services/shipping.service';
 import {PaymentService} from '../../services/payment.service';
-import {Router} from 'angular2/router';
 
 declare var Elevator: any;
 

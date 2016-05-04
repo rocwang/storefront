@@ -1,5 +1,5 @@
 <div class="ui link cards" *ngIf="catalog.products?.length">
-  <div class="card" *ngFor="#product of catalog.products">
+  <div class="card" *ngFor="let product of catalog.products">
 
     <div class="image">
       <img src="{{product.imgSrc}}" #productImg>

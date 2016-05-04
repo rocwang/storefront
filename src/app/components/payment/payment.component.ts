@@ -1,4 +1,4 @@
-import {Component, OnInit} from 'angular2/core';
+import {Component, OnInit} from '@angular/core';
 import {PaymentService} from '../../services/payment.service';
 import {ShippingService} from '../../services/shipping.service';
 

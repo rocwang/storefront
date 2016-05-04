@@ -63,7 +63,7 @@
     </div>
 
     <div class="field"
-         *ngFor="#method of shipping.availableMethods; #i=index"
+         *ngFor="let method of shipping.availableMethods; let i=index"
          [class.disabled]="payment.isPlacingOrder">
       <div class="ui radio checkbox">
         <input type="radio"

@@ -1,6 +1,6 @@
 <div class="ui divided items" *ngIf="cart?.totals?.items?.length">
 
-  <div class="item" *ngFor="#item of cart.totals.items">
+  <div class="item" *ngFor="let item of cart.totals.items">
     <div class="ui tiny image">
       <img src="http://semantic-ui.com/images/wireframe/image.png">
     </div>
@@ -26,7 +26,7 @@
 
 <table class="ui very compact striped single line table" *ngIf="cart?.totals?.total_segments?.length">
   <tbody>
-  <tr *ngFor="#total of cart.totals.total_segments" [class.grand-total]="total.title === 'Grand Total'">
+  <tr *ngFor="let total of cart.totals.total_segments" [class.grand-total]="total.title === 'Grand Total'">
     <td class="eight wide">{{total.title}}</td>
     <td class="eight wide">{{total.value | currency:'NZD':true}}</td>
   </tr>

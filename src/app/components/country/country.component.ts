@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, Output, ElementRef, EventEmitter} from 'angular2/core';
+import {Component, OnInit, Input, Output, ElementRef, EventEmitter} from '@angular/core';
 
 @Component({
   selector   : 'country',

@@ -31,8 +31,8 @@ var gulp               = require('gulp'),
     //    uglify       = require('gulp-uglify'),
     //    concat       = require('gulp-concat'),
     eslint             = require('gulp-eslint'),
-    tslint             = require("gulp-tslint"),
-    ts                 = require("gulp-typescript"),
+    tslint             = require('gulp-tslint'),
+    ts                 = require('gulp-typescript'),
 
     // Image plugins
     imagemin           = require('gulp-imagemin'),
@@ -41,7 +41,7 @@ var gulp               = require('gulp'),
 // Allows gulp --dist to be run for production compilation
 var isProduction = util.env.dist;
 
-var onError = notify.onError("Error: <%= error.message %>");
+var onError = notify.onError('Error: <%= error.message %>');
 
 // Base paths
 var basePaths = {
@@ -57,21 +57,21 @@ var srcFiles = {
     '**/*.scss',
   ],
   js      : [
-    "src/js/elevator.js",
-    "node_modules/jquery/dist/jquery.js",
-    "node_modules/card/lib/js/card.js",
+    'src/js/elevator.js',
+    'node_modules/jquery/dist/jquery.js',
+    'node_modules/card/lib/js/card.js',
 
-    "node_modules/es6-shim/es6-shim.min.js",
-    "node_modules/systemjs/dist/system-polyfills.js",
-    "node_modules/angular2/es6/dev/src/testing/shims_for_IE.js",
+    'node_modules/es6-shim/es6-shim.min.js',
+    'node_modules/zone.js/dist/zone.js',
+    'node_modules/reflect-metadata/Reflect.js',
+    'node_modules/systemjs/dist/system.src.js',
 
-    "node_modules/angular2/bundles/angular2-polyfills.js",
-    "node_modules/systemjs/dist/system.src.js",
-    "node_modules/rxjs/bundles/Rx.js",
-    "node_modules/angular2/bundles/angular2.dev.js",
-
-    "node_modules/angular2/bundles/router.dev.js",
-    "node_modules/angular2/bundles/http.dev.js"
+    'src/js/systemjs.config.js',
+  ],
+  node_modules: [
+    'node_modules/rxjs/**/*',
+    'node_modules/angular2-in-memory-web-api/**/*',
+    'node_modules/@angular/**/*',
   ],
   ts      : [
     '**/*.ts',
@@ -86,10 +86,10 @@ var srcFiles = {
     '**/*.html',
   ],
   semantic: [
-    "semantic/dist/**",
+    'semantic/dist/**',
   ],
-  misc : [
-    "audio/**/*.mp3",
+  misc    : [
+    'audio/**/*.mp3',
   ]
 };
 
@@ -149,6 +149,12 @@ gulp.task('eslint', function () {
 
 gulp.task('js', function () {
   return gulp.src(srcFiles.js)
+    .pipe(plumber({errorHandler: onError}))
+    .pipe(gulp.dest(basePaths.test + 'js'));
+});
+
+gulp.task('node_modules', function () {
+  return gulp.src(srcFiles.node_modules, {base: 'node_modules'})
     .pipe(plumber({errorHandler: onError}))
     .pipe(gulp.dest(basePaths.test + 'js'));
 });

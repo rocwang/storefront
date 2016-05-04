@@ -1,11 +1,11 @@
-import {Injectable} from 'angular2/core';
+import {Injectable} from '@angular/core';
 import {MagentoService} from './magento.service';
 import {CartService} from './cart.service';
 import {ShippingMethod} from '../typings/shipping-method.d';
 import {PaymentService} from './payment.service';
 import {Address} from '../typings/adress.d';
-import {Http, Headers, RequestOptions} from 'angular2/http';
-import {RadioButtonState} from 'angular2/common';
+import {Http, Headers, RequestOptions} from '@angular/http';
+import {RadioButtonState} from '@angular/common';
 
 @Injectable()
 export class ShippingService {

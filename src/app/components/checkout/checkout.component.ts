@@ -1,4 +1,4 @@
-import {Component, OnInit} from 'angular2/core';
+import {Component, OnInit} from '@angular/core';
 import {ShippingComponent} from '../shipping/shipping.component';
 import {PaymentComponent} from '../payment/payment.component';
 import {CartComponent} from '../cart/cart.component';

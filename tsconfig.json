@@ -12,6 +12,7 @@
         "rootDir"                       : "./src/"
     },
     "exclude"        : [
+        "nginx",
         "node_modules",
         "semantic",
         "test",

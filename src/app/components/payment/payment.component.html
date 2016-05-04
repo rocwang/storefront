@@ -31,7 +31,9 @@
   </div>
 
   <div class="grouped fields">
-    <div class="field" *ngFor="#method of payment.availableMethods; #i=index" [class.disabled]="payment.isPlacingOrder">
+    <div class="field"
+         *ngFor="let method of payment.availableMethods; let i=index"
+         [class.disabled]="payment.isPlacingOrder">
       <div class="ui radio checkbox">
         <input type="radio"
                tabindex="0"

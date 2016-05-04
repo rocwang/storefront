@@ -1,5 +1,5 @@
-import {Component, OnInit, ChangeDetectorRef} from 'angular2/core';
-import {ROUTER_DIRECTIVES, Router} from 'angular2/router';
+import {Component, OnInit, ChangeDetectorRef} from '@angular/core';
+import {ROUTER_DIRECTIVES, Router} from '@angular/router-deprecated';
 import {CartService} from '../../services/cart.service';
 
 @Component({

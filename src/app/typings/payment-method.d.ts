@@ -1,4 +1,4 @@
-import {RadioButtonState} from 'angular2/common';
+import {RadioButtonState} from '@angular/common';
 
 export interface PaymentMethod {
   code: string;

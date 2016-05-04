@@ -16,35 +16,18 @@
   <script src="js/elevator.js"></script>
   <script src="js/card.js"></script>
 
-  <!-- Libraries required by Angualr 2 -->
-  <!-- IE required polyfills, in this exact order -->
+  <!-- Libraries required by Angular 2 -->
   <script src="js/es6-shim.min.js"></script>
-  <script src="js/system-polyfills.js"></script>
-  <script src="js/shims_for_IE.js"></script>
-
-  <script src="js/angular2-polyfills.js"></script>
+  <script src="js/zone.js"></script>
+  <script src="js/Reflect.js"></script>
   <script src="js/system.src.js"></script>
-  <script src="js/Rx.js"></script>
-  <script src="js/angular2.dev.js"></script>
 
-  <script src="js/router.dev.js"></script>
-  <script src="js/http.dev.js"></script>
-
-  <!-- 2. Configure SystemJS -->
+  <script src="js/systemjs.config.js"></script>
   <script>
-    System.config({
-      packages: {
-        app: {
-          format          : 'register',
-          defaultExtension: 'js'
-        }
-      }
-    });
-    System.import('app/main').then(null, console.error.bind(console));
+    System.import('app').catch(function (err) { console.error(err); });
   </script>
 </head>
 <body>
-<!-- 3. Display the application -->
 <app>
   <div class="ui active text large loader">Loading</div>
 </app>

@@ -1,11 +1,11 @@
-import {Injectable} from 'angular2/core';
+import {Injectable} from '@angular/core';
 import {MagentoService} from './magento.service';
 import {CartService} from './cart.service';
 import {PaymentMethod} from '../typings/payment-method.d';
 import {AddtionalData} from '../typings/additional-data.d';
-import {Http, Headers, RequestOptions} from 'angular2/http';
-import {RadioButtonState} from 'angular2/common';
-import {EventEmitter} from 'angular2/core';
+import {Http, Headers, RequestOptions} from '@angular/http';
+import {RadioButtonState} from '@angular/common';
+import {EventEmitter} from '@angular/core';
 
 @Injectable()
 export class PaymentService {

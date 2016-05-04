@@ -1,7 +1,7 @@
-import {Injectable} from 'angular2/core';
+import {Injectable} from '@angular/core';
 import {MagentoService} from './magento.service';
 import {Product} from './../typings/product.d';
-import {Http, Response, Headers, RequestOptions, URLSearchParams} from 'angular2/http';
+import {Http, Response, Headers, RequestOptions, URLSearchParams} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 
 @Injectable()
