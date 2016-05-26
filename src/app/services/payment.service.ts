@@ -79,7 +79,7 @@ export class PaymentService {
       let options = new RequestOptions({headers: headers});
 
       this._http.post(
-        'http://m2.rocwang.me/rest/V1/guest-carts/' + cartId + '/payment-information',
+        'https://m2.rocwang.me/rest/V1/guest-carts/' + cartId + '/payment-information',
         body,
         options
       ).map(response => response.json())
@@ -123,7 +123,7 @@ export class PaymentService {
       let options = new RequestOptions({headers: headers});
 
       this._http.post(
-        'http://m2.rocwang.me/rest/V1/guest-carts/' + cartId + '/set-payment-information',
+        'https://m2.rocwang.me/rest/V1/guest-carts/' + cartId + '/set-payment-information',
         body,
         options
       ).map(response => response.json())
@@ -149,7 +149,7 @@ export class PaymentService {
       });
       let options = new RequestOptions({headers: headers});
 
-      return this._http.get('http://m2.rocwang.me/rest/V1/guest-carts/' + cartId + '/payment-methods', options)
+      return this._http.get('https://m2.rocwang.me/rest/V1/guest-carts/' + cartId + '/payment-methods', options)
         .map(response => response.json())
         .subscribe((data: PaymentMethod[]) => {
 

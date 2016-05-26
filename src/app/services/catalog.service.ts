@@ -38,7 +38,7 @@ export class CatalogService {
 
     let options = new RequestOptions({headers: headers, search: search});
 
-    return this._http.get('http://m2.rocwang.me/rest/V1/products', options)
+    return this._http.get('https://m2.rocwang.me/rest/V1/products', options)
       .map(response => response.json())
       .catch(this._handleError)
       .subscribe(data => {
@@ -50,7 +50,7 @@ export class CatalogService {
         products.forEach((product: any) => {
           product.custom_attributes.forEach((attr: any) => {
             if (attr.attribute_code === 'small_image') {
-              product.imgSrc = this._magento.baseUrl + 'media/catalog/product' + attr.value;
+              product.imgSrc = this._magento.baseUrl + 'pub/media/catalog/product' + attr.value;
             }
           });
 

@@ -43,7 +43,7 @@ export class CartService {
         });
         let options = new RequestOptions({headers: headers});
 
-        return this._http.post('http://m2.rocwang.me/rest/V1/guest-carts/' + cartId + '/items', body, options)
+        return this._http.post('https://m2.rocwang.me/rest/V1/guest-carts/' + cartId + '/items', body, options)
           .map(response => response.json())
           .subscribe(cartItem => {
 
@@ -69,7 +69,7 @@ export class CartService {
       });
       let options = new RequestOptions({headers: headers});
 
-      return this._http.delete('http://m2.rocwang.me/rest/V1/guest-carts/' + cartId + '/items/' + item.item_id, options)
+      return this._http.delete('https://m2.rocwang.me/rest/V1/guest-carts/' + cartId + '/items/' + item.item_id, options)
         .map(response => response.json())
         .subscribe(isSucceeded => {
 
@@ -100,7 +100,7 @@ export class CartService {
       });
       let options = new RequestOptions({headers: headers});
 
-      return this._http.post('http://m2.rocwang.me/rest/V1/guest-carts', '', options)
+      return this._http.post('https://m2.rocwang.me/rest/V1/guest-carts', '', options)
         .map(response => {
 
           var cartId = response.json();
@@ -127,7 +127,7 @@ export class CartService {
       });
       let options = new RequestOptions({headers: headers});
 
-      return this._http.get('http://m2.rocwang.me/rest/V1/guest-carts/' + cartId + '/totals', options)
+      return this._http.get('https://m2.rocwang.me/rest/V1/guest-carts/' + cartId + '/totals', options)
         .map(res => <Totals>res.json())
         .catch(this._handleError)
         .subscribe(totals => {
@@ -157,7 +157,7 @@ export class CartService {
         });
         let options = new RequestOptions({headers: headers});
 
-        return this._http.get('http://m2.rocwang.me/rest/V1/guest-carts/' + cartId, options)
+        return this._http.get('https://m2.rocwang.me/rest/V1/guest-carts/' + cartId, options)
           .map(response => <any>response.json())
           .catch(this._handleError)
           .subscribe(data => {

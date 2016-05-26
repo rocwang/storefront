@@ -54,7 +54,7 @@ export class ShippingService {
       let options = new RequestOptions({headers: headers});
 
       this._http.post(
-        'http://m2.rocwang.me/rest/V1/guest-carts/' + cartId + '/estimate-shipping-methods',
+        'https://m2.rocwang.me/rest/V1/guest-carts/' + cartId + '/estimate-shipping-methods',
         body,
         options
       ).map(response => response.json())
@@ -87,7 +87,7 @@ export class ShippingService {
       });
       let options = new RequestOptions({headers: headers});
 
-      return this._http.get('http://m2.rocwang.me/rest/V1/guest-carts/' + cartId + '/shipping-methods', options)
+      return this._http.get('https://m2.rocwang.me/rest/V1/guest-carts/' + cartId + '/shipping-methods', options)
         .map(response => response.json())
         .subscribe((data: ShippingMethod[]) => {
 
@@ -135,7 +135,7 @@ export class ShippingService {
 
       this._cart.isLoading = true;
       this._http.post(
-        'http://m2.rocwang.me/rest/V1/guest-carts/' + cartId + '/shipping-information',
+        'https://m2.rocwang.me/rest/V1/guest-carts/' + cartId + '/shipping-information',
         body,
         options
       ).map(response => response.json())
