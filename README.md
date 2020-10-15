@@ -1,5 +1,7 @@
 # An Angular 2 storefront app for Magento 2
 
+[Demo video](./demo.webm)
+
 Magento 2 comes with rich [REST API](http://devdocs.magento.com/guides/v2.0/get-started/bk-get-started-api.html)
 support, which contains almost every features you can find in the native front end. So in theory, we can build
 a standalone web app as an alternative storefront, which consumes the API provided by a headless Magento 2 instance.
